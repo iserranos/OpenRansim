@@ -8,7 +8,7 @@ all: fmt install build
 
 install:
 	@echo "Install dependencies"
-	@go get -u github.com/spf13/cobra
+	@go get ./...
 
 run:
 	ifeq (,$(wildcard OpenRansim))
@@ -29,3 +29,4 @@ fmt:
 clean:
 	@echo "Cleaning build..."
 	@rm -rf OpenRansim
+

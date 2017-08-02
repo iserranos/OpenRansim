@@ -132,7 +132,7 @@ func generate_rsa_key() string {
 
 	private, err := rsa.GenerateKey(reader, bitSize)
 	check(err)
-	public := &private.N
+	public := private.N
 	hash := sha512.Sum384([]byte(public.String()))
 	pass := hex.EncodeToString(hash[:])[0:16]
 	fmt.Println(pass)
