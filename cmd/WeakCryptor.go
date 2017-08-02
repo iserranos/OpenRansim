@@ -20,27 +20,40 @@ import (
 	"fmt"
 )
 
+const weak_cryptor_folder = "WeakCryptorTest"
+
+var weak_cryptor_key string
+
 var WeakCryptorCmd = &cobra.Command{
 	Use:   "weak-cryptor",
 	Short: "Uses weak encryption to encrypt data and removes original files",
 	Long:  `Uses weak encryption to encrypt data and removes original files`,
+	PreRun: func(cmd *cobra.Command, args []string) {
+		create_folder(weak_cryptor_folder)
+		create_files(weak_cryptor_folder, 500)
+		weak_cryptor_key = generate_rsa_key()
+	},
 	RunE: func(cmd *cobra.Command, args []string) error {
 
-		var folder = "WeakCryporTest"
-		var key = generate_rsa_key()
-
-		create_folder(folder)
-		create_files(folder, 50)
-		files := get_files(folder)
+		files := get_files(weak_cryptor_folder)
 		for _, file := range files {
-			file_name := fmt.Sprintf(pwd+"/%s/%s", folder, file.Name())
+			file_name := fmt.Sprintf(pwd+"/%s/%s", weak_cryptor_folder, file.Name())
 			text, err := read_from_file(file_name)
 			check(err)
-			ciphertext := encrypt(string(text), key)
+			ciphertext := encrypt(string(text), weak_cryptor_key)
 			write_to_file(ciphertext, file_name+".copy")
 			remove(file_name)
 			check(err)
 		}
 		return nil
+	},
+	PostRun: func(cmd *cobra.Command, args []string) {
+		files := get_files(weak_cryptor_folder)
+		if len(files) == 500{
+			fmt.Println("Vulnerable!!!")
+		}else{
+			fmt.Println("Passed :)")
+		}
+		remove(fmt.Sprintf(pwd+"/%s", weak_cryptor_folder))
 	},
 }

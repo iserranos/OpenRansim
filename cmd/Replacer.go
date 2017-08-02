@@ -21,23 +21,34 @@ import (
 	"strconv"
 )
 
+const replacer_folder = "ReplacerTest"
+
 var ReplacerCmd = &cobra.Command{
 	Use:   "replacer",
 	Short: "Replace the contents of the original files",
 	Long:  `Replace the contents of the original files`,
+	PreRun: func(cmd *cobra.Command, args []string) {
+		create_folder(replacer_folder)
+		create_files(replacer_folder, 500)
+	},
 	RunE: func(cmd *cobra.Command, args []string) error {
 
-		var folder = "ReplacerTest"
-
-		create_folder(folder)
-		create_files(folder, 500)
-		files := get_files(folder)
+		files := get_files(replacer_folder)
 		for _, file := range files {
-			file_name := fmt.Sprintf(pwd+"/%s/%s", folder, file.Name())
+			file_name := fmt.Sprintf(pwd+"/%s/%s", replacer_folder, file.Name())
 			i, err := strconv.Atoi(file.Name())
 			check(err)
-			write_to_file(rand_string(i * 42), file_name)
+			write_to_file(rand_string(i*42), file_name)
 		}
 		return nil
+	},
+	PostRun: func(cmd *cobra.Command, args []string) {
+		files := get_files(replacer_folder)
+		if len(files) == 500{
+			fmt.Println("Vulnerable!!!")
+		}else{
+			fmt.Println("Passed :)")
+		}
+		remove(fmt.Sprintf(pwd+"/%s", replacer_folder))
 	},
 }

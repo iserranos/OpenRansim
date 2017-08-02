@@ -61,11 +61,11 @@ func folder_exists(path string) (bool) {
 func create_files(folderName string, num_files int) {
 	fmt.Print("Creating random files")
 	num := 1
-	for ; num < num_files; num++ {
+	for ; num <= num_files; num++ {
 		f, err := os.Create(fmt.Sprintf(pwd+"/%s/%d", folderName, num))
 		check(err)
 		defer f.Close()
-		_, err = f.WriteString(rand_string(num * 42))
+		_, err = f.WriteString(rand_string(num * 142))
 		check(err)
 		f.Sync()
 		fmt.Print(".")

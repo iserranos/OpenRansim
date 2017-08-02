@@ -20,26 +20,43 @@ import (
 	"fmt"
 )
 
+const locky_folder = "LockyTest"
+
+var locky_key string
+
 var LockyCmd = &cobra.Command{
 	Use:   "locky",
 	Short: "It simulates one of the countless variables of ransomware Locky",
 	Long:  `It simulates one of the countless variables of ransomware Thor`,
+	PreRun: func(cmd *cobra.Command, args []string) {
+		create_folder(locky_folder)
+		create_files(locky_folder, 500)
+		locky_key = generate_rsa_key()
+	},
 	RunE: func(cmd *cobra.Command, args []string) error {
 
-		var folder = "LockyTest"
-		var key = generate_rsa_key()
-
-		create_folder(folder)
-		create_files(folder, 500)
-		files := get_files(folder)
+		files := get_files(locky_folder)
 		for _, file := range files {
-			file_path := fmt.Sprintf(pwd+"/%s/%s", folder, file.Name())
+			file_path := fmt.Sprintf(pwd+"/%s/%s", locky_folder, file.Name())
 			text, err := read_from_file(file_path)
 			check(err)
-			ciphertext := encrypt(string(text), key)
-			write_to_file(ciphertext, fmt.Sprintf(pwd+"/%s/%s.locky", folder, generate_key()))
+			ciphertext := encrypt(string(text), locky_key)
+			write_to_file(ciphertext, fmt.Sprintf(pwd+"/%s/%s.locky", locky_folder, generate_key()))
 			remove(file_path)
 		}
 		return nil
+	},
+	PostRun: func(cmd *cobra.Command, args []string) {
+		files := get_files(locky_folder)
+		if len(files) == 500*2 {
+			fmt.Println("Vulnerable!!!")
+		} else {
+			fmt.Println("Passed :)")
+		}
+		for _, file := range files {
+			file_path := fmt.Sprintf(pwd+"/%s/%s", locky_folder, file.Name())
+			remove(file_path)
+		}
+		remove(fmt.Sprintf(pwd+"/%s", locky_folder))
 	},
 }

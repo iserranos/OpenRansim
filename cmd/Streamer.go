@@ -20,27 +20,40 @@ import (
 	"fmt"
 )
 
+const streamer_folder = "StreamerTest"
+
+var streamer_key string
+
 var StreamerCmd = &cobra.Command{
 	Use:   "streamer",
 	Short: "Encrypts all data and groups it into a single file",
 	Long:  `Encrypts all data and groups it into a single file`,
+	PreRun: func(cmd *cobra.Command, args []string) {
+		create_folder(streamer_folder)
+		create_files(streamer_folder, 500)
+		streamer_key = generate_rsa_key()
+	},
 	RunE: func(cmd *cobra.Command, args []string) error {
 
-		var folder = "StreamerTest"
-		var key = generate_rsa_key()
-
-		create_folder(folder)
-		create_files(folder, 500)
-		files := get_files(folder)
+		files := get_files(streamer_folder)
 		var all_text string
 		for _, file := range files {
-			file_name := fmt.Sprintf(pwd+"/%s/%s", folder, file.Name())
+			file_name := fmt.Sprintf(pwd+"/%s/%s", streamer_folder, file.Name())
 			text, err := read_from_file(file_name)
 			check(err)
-			ciphertext := encrypt(string(text), key)
+			ciphertext := encrypt(string(text), streamer_key)
 			all_text += ciphertext
 		}
-		write_to_file(all_text, fmt.Sprintf(pwd+"/%s/streamer", folder))
+		write_to_file(all_text, fmt.Sprintf(pwd+"/%s/streamer", streamer_folder))
 		return nil
+	},
+	PostRun: func(cmd *cobra.Command, args []string) {
+		files := get_files(streamer_folder)
+		if len(files) == 500+1 {
+			fmt.Println("Vulnerable!!!")
+		} else {
+			fmt.Println("Passed :)")
+		}
+		remove(fmt.Sprintf(pwd+"/%s", streamer_folder))
 	},
 }

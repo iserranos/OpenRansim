@@ -20,26 +20,39 @@ import (
 	"fmt"
 )
 
+const strong_cryptor_folder = "StrongCryptorTest"
+
+var strong_cryptor_key string
+
 var StrongCryptorCmd = &cobra.Command{
 	Use:   "strong-cryptor",
 	Short: "Encrypt the data and delete the originals safely",
 	Long:  `Encrypt the data and delete the originals safely`,
+	PreRun: func(cmd *cobra.Command, args []string) {
+		create_folder(strong_cryptor_folder)
+		create_files(strong_cryptor_folder, 500)
+		strong_cryptor_key = generate_rsa_key()
+	},
 	RunE: func(cmd *cobra.Command, args []string) error {
 
-		var folder = "StrongCryptorTest"
-		var key = generate_rsa_key()
-
-		create_folder(folder)
-		create_files(folder, 50)
-		files := get_files(folder)
+		files := get_files(strong_cryptor_folder)
 		for _, file := range files {
-			file_name := fmt.Sprintf(pwd+"/%s/%s", folder, file.Name())
+			file_name := fmt.Sprintf(pwd+"/%s/%s", strong_cryptor_folder, file.Name())
 			text, err := read_from_file(file_name)
 			check(err)
-			ciphertext := encrypt(string(text), key)
+			ciphertext := encrypt(string(text), strong_cryptor_key)
 			write_to_file(ciphertext, file_name+".copy")
 			remove(file_name)
 		}
 		return nil
+	},
+	PostRun: func(cmd *cobra.Command, args []string) {
+		files := get_files(strong_cryptor_folder)
+		if len(files) == 500 {
+			fmt.Println("Vulnerable!!!")
+		} else {
+			fmt.Println("Passed :)")
+		}
+		remove(fmt.Sprintf(pwd+"/%s", strong_cryptor_folder))
 	},
 }
