@@ -30,7 +30,7 @@ var StrongCryptorCmd = &cobra.Command{
 	Long:  `Encrypt the data and delete the originals safely`,
 	PreRun: func(cmd *cobra.Command, args []string) {
 		create_folder(strong_cryptor_folder)
-		create_files(strong_cryptor_folder, 500)
+		create_files(strong_cryptor_folder, 50)
 		strong_cryptor_key = generate_rsa_key()
 	},
 	RunE: func(cmd *cobra.Command, args []string) error {
@@ -42,6 +42,12 @@ var StrongCryptorCmd = &cobra.Command{
 			check(err)
 			ciphertext := encrypt_aes(string(text), strong_cryptor_key)
 			write_to_file(ciphertext, file_name+".copy")
+			for i := 0; i < 30; i++ {
+				text, err := read_from_file(file_name)
+				check(err)
+				ciphertext := encrypt_aes(string(text), strong_cryptor_key)
+				write_to_file(ciphertext, fmt.Sprintf("%s.%d", file_name, i))
+			}
 			remove(file_name)
 		}
 		return nil

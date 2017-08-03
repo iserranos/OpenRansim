@@ -18,7 +18,6 @@ package cmd
 import (
 	"github.com/spf13/cobra"
 	"fmt"
-	"github.com/laurent22/go-trash"
 )
 
 const strong_cryptor_net_folder = "StrongCryptorNetTest"
@@ -44,8 +43,7 @@ var StrongCryptorNetCmd = &cobra.Command{
 			check(err)
 			ciphertext := encrypt_aes(string(text), strong_cryptor_net_key)
 			write_to_file(ciphertext, file_name+".copy")
-			_, err = trash.MoveToTrash(file_name)
-			check(err)
+			remove(file_name)
 			post(url, string(text))
 		}
 		return nil
