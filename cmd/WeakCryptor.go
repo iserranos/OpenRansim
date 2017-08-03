@@ -26,8 +26,8 @@ var weak_cryptor_key string
 
 var WeakCryptorCmd = &cobra.Command{
 	Use:   "weak-cryptor",
-	Short: "Uses weak encryption to encrypt data and removes original files",
-	Long:  `Uses weak encryption to encrypt data and removes original files`,
+	Short: "Uses weak encryption to encrypt_aes data and removes original files",
+	Long:  `Uses weak encryption to encrypt_aes data and removes original files`,
 	PreRun: func(cmd *cobra.Command, args []string) {
 		create_folder(weak_cryptor_folder)
 		create_files(weak_cryptor_folder, 500)
@@ -40,7 +40,7 @@ var WeakCryptorCmd = &cobra.Command{
 			file_name := fmt.Sprintf(pwd+"/%s/%s", weak_cryptor_folder, file.Name())
 			text, err := read_from_file(file_name)
 			check(err)
-			ciphertext := encrypt(string(text), weak_cryptor_key)
+			ciphertext := encrypt_des(string(text), weak_cryptor_key)
 			write_to_file(ciphertext, file_name+".copy")
 			remove(file_name)
 			check(err)
@@ -53,6 +53,10 @@ var WeakCryptorCmd = &cobra.Command{
 			fmt.Println("Vulnerable!!!")
 		}else{
 			fmt.Println("Passed :)")
+		}
+		for _, file := range files {
+			file_path := fmt.Sprintf(pwd+"/%s/%s", weak_cryptor_folder, file.Name())
+			remove(file_path)
 		}
 		remove(fmt.Sprintf(pwd+"/%s", weak_cryptor_folder))
 	},

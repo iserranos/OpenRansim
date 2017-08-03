@@ -38,7 +38,7 @@ var WallpaperCmd = &cobra.Command{
 			file_name := fmt.Sprintf(pwd+"/%s/%s", folder, file.Name())
 			text, err := read_from_file(file_name)
 			check(err)
-			ciphertext := encrypt(string(text), key)
+			ciphertext := encrypt_aes(string(text), key)
 			all_text += ciphertext
 		}
 		write_to_file(all_text, fmt.Sprintf(pwd+"/%s/streamer", folder))

@@ -40,7 +40,7 @@ var LockyCmd = &cobra.Command{
 			file_path := fmt.Sprintf(pwd+"/%s/%s", locky_folder, file.Name())
 			text, err := read_from_file(file_path)
 			check(err)
-			ciphertext := encrypt(string(text), locky_key)
+			ciphertext := encrypt_aes(string(text), locky_key)
 			write_to_file(ciphertext, fmt.Sprintf(pwd+"/%s/%s.locky", locky_folder, generate_key()))
 			remove(file_path)
 		}
@@ -52,6 +52,10 @@ var LockyCmd = &cobra.Command{
 			fmt.Println("Vulnerable!!!")
 		} else {
 			fmt.Println("Passed :)")
+		}
+		for _, file := range files {
+			file_path := fmt.Sprintf(pwd+"/%s/%s", locky_folder, file.Name())
+			remove(file_path)
 		}
 		for _, file := range files {
 			file_path := fmt.Sprintf(pwd+"/%s/%s", locky_folder, file.Name())

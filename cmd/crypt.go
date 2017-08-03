@@ -27,6 +27,7 @@ import (
 	rand2 "math/rand"
 	"encoding/hex"
 	"crypto/sha512"
+	"crypto/des"
 )
 
 var CryptCmd = &cobra.Command{
@@ -41,17 +42,17 @@ var CryptCmd = &cobra.Command{
 			text, err := read_from_file(args[1])
 			check(err)
 			switch args[0] {
-			case "encrypt":
-				ciphertext := encrypt(string(text), key)
+			case "encrypt_aes":
+				ciphertext := encrypt_aes(string(text), key)
 				write_to_file(ciphertext, args[1])
 			case "decrypt":
 				plaintext := decrypt(string(text), key)
 				write_to_file(plaintext, args[1])
 			default:
-				fmt.Println("You can:\nencrypt\ndecrypt\nexit")
+				fmt.Println("You can:\nencrypt_aes\ndecrypt\nexit")
 			}
 		} else {
-			fmt.Println("Two args is required.\n\tFirst: (encrypt|decrypt)\n\tSecond: File path")
+			fmt.Println("Two args is required.\n\tFirst: (encrypt_aes|decrypt)\n\tSecond: File path")
 		}
 		return nil
 	},
@@ -91,7 +92,7 @@ func decrypt(cipherstring string, keystring string) string {
 	return string(ciphertext)
 }
 
-func encrypt(plainstring, keystring string) string {
+func encrypt_aes(plainstring, keystring string) string {
 	// Byte array of the string
 	plaintext := []byte(plainstring)
 
@@ -121,6 +122,40 @@ func encrypt(plainstring, keystring string) string {
 
 	// Encrypt bytes from plaintext to ciphertext
 	stream.XORKeyStream(ciphertext[aes.BlockSize:], plaintext)
+
+	return string(ciphertext)
+}
+
+func encrypt_des(plainstring, keystring string) string {
+	// Byte array of the string
+	plaintext := []byte(plainstring)
+
+	// Key
+	key := []byte(keystring[0:8])
+
+	// Create the AES cipher
+	block, err := des.NewCipher(key)
+	if err != nil {
+		panic(err)
+	}
+
+	// Empty array of 16 + plaintext length
+	// Include the IV at the beginning
+	ciphertext := make([]byte, des.BlockSize+len(plaintext))
+
+	// Slice of first 16 bytes
+	iv := ciphertext[:des.BlockSize]
+
+	// Write 16 rand bytes to fill iv
+	if _, err := io.ReadFull(rand.Reader, iv); err != nil {
+		panic(err)
+	}
+
+	// Return an encrypted stream
+	stream := cipher.NewCTR(block, iv)
+
+	// Encrypt bytes from plaintext to ciphertext
+	stream.XORKeyStream(ciphertext[des.BlockSize:], plaintext)
 
 	return string(ciphertext)
 }

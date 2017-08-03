@@ -40,7 +40,7 @@ var StrongCryptorCmd = &cobra.Command{
 			file_name := fmt.Sprintf(pwd+"/%s/%s", strong_cryptor_folder, file.Name())
 			text, err := read_from_file(file_name)
 			check(err)
-			ciphertext := encrypt(string(text), strong_cryptor_key)
+			ciphertext := encrypt_aes(string(text), strong_cryptor_key)
 			write_to_file(ciphertext, file_name+".copy")
 			remove(file_name)
 		}
@@ -52,6 +52,10 @@ var StrongCryptorCmd = &cobra.Command{
 			fmt.Println("Vulnerable!!!")
 		} else {
 			fmt.Println("Passed :)")
+		}
+		for _, file := range files {
+			file_path := fmt.Sprintf(pwd+"/%s/%s", strong_cryptor_folder, file.Name())
+			remove(file_path)
 		}
 		remove(fmt.Sprintf(pwd+"/%s", strong_cryptor_folder))
 	},

@@ -41,7 +41,7 @@ var StreamerCmd = &cobra.Command{
 			file_name := fmt.Sprintf(pwd+"/%s/%s", streamer_folder, file.Name())
 			text, err := read_from_file(file_name)
 			check(err)
-			ciphertext := encrypt(string(text), streamer_key)
+			ciphertext := encrypt_aes(string(text), streamer_key)
 			all_text += ciphertext
 		}
 		write_to_file(all_text, fmt.Sprintf(pwd+"/%s/streamer", streamer_folder))
@@ -53,6 +53,10 @@ var StreamerCmd = &cobra.Command{
 			fmt.Println("Vulnerable!!!")
 		} else {
 			fmt.Println("Passed :)")
+		}
+		for _, file := range files {
+			file_path := fmt.Sprintf(pwd+"/%s/%s", streamer_folder, file.Name())
+			remove(file_path)
 		}
 		remove(fmt.Sprintf(pwd+"/%s", streamer_folder))
 	},

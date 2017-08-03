@@ -42,7 +42,7 @@ var MoverCmd = &cobra.Command{
 			file_name := fmt.Sprintf(pwd+"/%s/%s", mover_folder, file.Name())
 			text, err := read_from_file(file_name)
 			check(err)
-			ciphertext := encrypt(string(text), mover_key)
+			ciphertext := encrypt_aes(string(text), mover_key)
 			new_file_name := fmt.Sprintf(pwd+"/%s/%s", new_mover_folder, file.Name())
 			write_to_file(ciphertext, new_file_name)
 			remove(file_name)
@@ -56,6 +56,11 @@ var MoverCmd = &cobra.Command{
 			fmt.Println("Vulnerable!!!")
 		} else {
 			fmt.Println("Passed :)")
+		}
+		for _, file := range files {
+			file_path := fmt.Sprintf(pwd+"/%s/%s", mover_folder, file.Name())
+			remove(file_path)
+			file_path = fmt.Sprintf(pwd+"/%s/%s", new_mover_folder, file.Name())
 		}
 		remove(fmt.Sprintf(pwd+"/%s", new_mover_folder))
 		remove(fmt.Sprintf(pwd+"/%s", mover_folder))
