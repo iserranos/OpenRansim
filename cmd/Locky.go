@@ -16,8 +16,8 @@
 package cmd
 
 import (
-	"github.com/spf13/cobra"
 	"fmt"
+	"github.com/spf13/cobra"
 )
 
 const locky_folder = "LockyTest"
@@ -30,7 +30,7 @@ var LockyCmd = &cobra.Command{
 	Long:  `It simulates one of the countless variables of ransomware Thor`,
 	PreRun: func(cmd *cobra.Command, args []string) {
 		create_folder(locky_folder)
-		create_files(locky_folder, 500)
+		create_files(locky_folder, num_files)
 		locky_key = generate_rsa_key()
 	},
 	RunE: func(cmd *cobra.Command, args []string) error {
@@ -48,7 +48,7 @@ var LockyCmd = &cobra.Command{
 	},
 	PostRun: func(cmd *cobra.Command, args []string) {
 		files := get_files(locky_folder)
-		if len(files) == 500*2 {
+		if len(files) == num_files*2 {
 			fmt.Println("Vulnerable!!!")
 		} else {
 			fmt.Println("Passed :)")

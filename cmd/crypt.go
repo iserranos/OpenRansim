@@ -16,18 +16,18 @@
 package cmd
 
 import (
-	"fmt"
-	"github.com/spf13/cobra"
 	"crypto/aes"
-	"io"
 	"crypto/cipher"
+	"crypto/des"
 	"crypto/rand"
 	"crypto/rsa"
-	"time"
-	rand2 "math/rand"
-	"encoding/hex"
 	"crypto/sha512"
-	"crypto/des"
+	"encoding/hex"
+	"fmt"
+	"github.com/spf13/cobra"
+	"io"
+	rand2 "math/rand"
+	"time"
 )
 
 var CryptCmd = &cobra.Command{

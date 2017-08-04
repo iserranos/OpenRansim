@@ -4,12 +4,15 @@ ifeq (run,$(firstword $(MAKECMDGOALS)))
   $(eval $(RUN_ARGS):;@:)
 endif
 
+.PHONY: all
 all: fmt install build
 
+.PHONY: install
 install:
 	@echo "Install dependencies"
 	@go get ./...
 
+.PHONY: run
 run:
 	ifeq (,$(wildcard OpenRansim))
 	@echo "To run OpenRansim first run 'make all'"
@@ -18,14 +21,17 @@ run:
 	@echo "To run OpenRansim first run 'make all'"
 	endif
 
+.PHONY: build
 build:
 	@echo "Building OpenRansim"
 	go build -o OpenRansim
 
+.PHONY: fmt
 fmt:
 	@echo "Formatting all go code..."
 	go fmt `go list ./... | grep -v vendor`
 
+.PHONY: clean
 clean:
 	@echo "Cleaning build..."
 	@rm -rf OpenRansim

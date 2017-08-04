@@ -16,9 +16,9 @@
 package cmd
 
 import (
+	"fmt"
 	"github.com/reujab/wallpaper"
 	"github.com/spf13/cobra"
-	"fmt"
 )
 
 var WallpaperCmd = &cobra.Command{
@@ -46,7 +46,6 @@ var WallpaperCmd = &cobra.Command{
 	},
 }
 
-func change_wallpaper(url string)  {
+func change_wallpaper(url string) {
 	wallpaper.SetFromURL(url)
 }
-

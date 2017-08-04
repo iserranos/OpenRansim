@@ -16,8 +16,8 @@
 package cmd
 
 import (
-	"github.com/spf13/cobra"
 	"fmt"
+	"github.com/spf13/cobra"
 )
 
 const strong_cryptor_folder = "StrongCryptorTest"
@@ -30,7 +30,7 @@ var StrongCryptorCmd = &cobra.Command{
 	Long:  `Encrypt the data and delete the originals safely`,
 	PreRun: func(cmd *cobra.Command, args []string) {
 		create_folder(strong_cryptor_folder)
-		create_files(strong_cryptor_folder, 50)
+		create_files(strong_cryptor_folder, num_files)
 		strong_cryptor_key = generate_rsa_key()
 	},
 	RunE: func(cmd *cobra.Command, args []string) error {
@@ -54,7 +54,7 @@ var StrongCryptorCmd = &cobra.Command{
 	},
 	PostRun: func(cmd *cobra.Command, args []string) {
 		files := get_files(strong_cryptor_folder)
-		if len(files) == 500 {
+		if len(files) == num_files {
 			fmt.Println("Vulnerable!!!")
 		} else {
 			fmt.Println("Passed :)")

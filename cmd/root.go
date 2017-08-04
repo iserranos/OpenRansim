@@ -22,6 +22,7 @@ import (
 )
 
 var CommandName string = "OpenRansim"
+var num_files int
 
 // RootCmd represents the base command when called without any subcommands
 var RootCmd = &cobra.Command{
@@ -42,6 +43,17 @@ func Execute() {
 		StrongCryptorFastCmd,
 		StrongCryptorNetCmd,
 		ThorCmd, LockyCmd, WeakCryptorCmd)
+
+	InsideCryptoCmd.Flags().IntVarP(&num_files, "number-files", "n", 500, "Number of files that scenario will work with")
+	MoverCmd.Flags().IntVarP(&num_files, "number-files", "n", 500, "Number of files that scenario will work with")
+	ReplacerCmd.Flags().IntVarP(&num_files, "number-files", "n", 500, "Number of files that scenario will work with")
+	StreamerCmd.Flags().IntVarP(&num_files, "number-files", "n", 500, "Number of files that scenario will work with")
+	StrongCryptorCmd.Flags().IntVarP(&num_files, "number-files", "n", 500, "Number of files that scenario will work with")
+	StrongCryptorFastCmd.Flags().IntVarP(&num_files, "number-files", "n", 500, "Number of files that scenario will work with")
+	StrongCryptorNetCmd.Flags().IntVarP(&num_files, "number-files", "n", 500, "Number of files that scenario will work with")
+	ThorCmd.Flags().IntVarP(&num_files, "number-files", "n", 500, "Number of files that scenario will work with")
+	LockyCmd.Flags().IntVarP(&num_files, "number-files", "n", 500, "Number of files that scenario will work with")
+	WeakCryptorCmd.Flags().IntVarP(&num_files, "number-files", "n", 500, "Number of files that scenario will work with")
 
 	if err := rootCmd.Execute(); err != nil {
 		fmt.Println(err)

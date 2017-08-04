@@ -19,8 +19,8 @@ import (
 	"fmt"
 	"github.com/spf13/cobra"
 
-	"strings"
 	"net/http"
+	"strings"
 )
 
 var NetworkCmd = &cobra.Command{

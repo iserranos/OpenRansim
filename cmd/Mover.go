@@ -16,8 +16,8 @@
 package cmd
 
 import (
-	"github.com/spf13/cobra"
 	"fmt"
+	"github.com/spf13/cobra"
 )
 
 const mover_folder = "MoverTest"
@@ -32,7 +32,7 @@ var MoverCmd = &cobra.Command{
 	PreRun: func(cmd *cobra.Command, args []string) {
 		create_folder(mover_folder)
 		create_folder(new_mover_folder)
-		create_files(mover_folder, 500)
+		create_files(mover_folder, num_files)
 		mover_key = generate_rsa_key()
 	},
 	RunE: func(cmd *cobra.Command, args []string) error {
@@ -52,7 +52,7 @@ var MoverCmd = &cobra.Command{
 	},
 	PostRun: func(cmd *cobra.Command, args []string) {
 		files := get_files(new_mover_folder)
-		if len(files) == 500 {
+		if len(files) == num_files {
 			fmt.Println("Vulnerable!!!")
 		} else {
 			fmt.Println("Passed :)")

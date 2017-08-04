@@ -16,8 +16,8 @@
 package cmd
 
 import (
-	"github.com/spf13/cobra"
 	"fmt"
+	"github.com/spf13/cobra"
 	"strconv"
 )
 
@@ -29,7 +29,7 @@ var ReplacerCmd = &cobra.Command{
 	Long:  `Replace the contents of the original files`,
 	PreRun: func(cmd *cobra.Command, args []string) {
 		create_folder(replacer_folder)
-		create_files(replacer_folder, 500)
+		create_files(replacer_folder, num_files)
 	},
 	RunE: func(cmd *cobra.Command, args []string) error {
 
@@ -44,9 +44,9 @@ var ReplacerCmd = &cobra.Command{
 	},
 	PostRun: func(cmd *cobra.Command, args []string) {
 		files := get_files(replacer_folder)
-		if len(files) == 500{
+		if len(files) == num_files {
 			fmt.Println("Vulnerable!!!")
-		}else{
+		} else {
 			fmt.Println("Passed :)")
 		}
 		remove_all(fmt.Sprintf(pwd+"/%s", replacer_folder))

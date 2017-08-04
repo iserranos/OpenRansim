@@ -16,10 +16,10 @@
 package cmd
 
 import (
-	"github.com/spf13/cobra"
-	"os"
 	"fmt"
+	"github.com/spf13/cobra"
 	"io/ioutil"
+	"os"
 )
 
 var pwd, _ = os.Getwd()
@@ -47,7 +47,7 @@ func create_folder(folderName string) {
 	}
 }
 
-func folder_exists(path string) (bool) {
+func folder_exists(path string) bool {
 	_, err := os.Stat(path)
 	if err == nil {
 		return true
@@ -106,13 +106,12 @@ func read_from_file(file string) ([]byte, error) {
 	return data, err
 }
 
-func remove(path string)  {
+func remove(path string) {
 	err := os.Remove(path)
 	check(err)
 }
 
-func remove_all(path string)  {
+func remove_all(path string) {
 	err := os.RemoveAll(path)
 	check(err)
 }
-

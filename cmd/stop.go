@@ -16,10 +16,10 @@
 package cmd
 
 import (
+	"fmt"
 	"github.com/spf13/cobra"
 	"os"
 	"path/filepath"
-	"fmt"
 )
 
 var StopCmd = &cobra.Command{

@@ -16,8 +16,8 @@
 package cmd
 
 import (
-	"github.com/spf13/cobra"
 	"fmt"
+	"github.com/spf13/cobra"
 )
 
 const inside_folder = "InsideCryptorTest"
@@ -30,7 +30,7 @@ var InsideCryptoCmd = &cobra.Command{
 	Long:  `Encrypt the data and overwrite the original files`,
 	PreRun: func(cmd *cobra.Command, args []string) {
 		create_folder(inside_folder)
-		create_files(inside_folder, 500)
+		create_files(inside_folder, num_files)
 		inside_key = generate_rsa_key()
 	},
 	RunE: func(cmd *cobra.Command, args []string) error {
@@ -47,7 +47,7 @@ var InsideCryptoCmd = &cobra.Command{
 	},
 	PostRun: func(cmd *cobra.Command, args []string) {
 		files := get_files(inside_folder)
-		if len(files) == 500 {
+		if len(files) == num_files {
 			fmt.Println("Vulnerable!!!")
 		} else {
 			fmt.Println("Passed :)")

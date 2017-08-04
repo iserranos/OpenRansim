@@ -16,8 +16,8 @@
 package cmd
 
 import (
-	"github.com/spf13/cobra"
 	"fmt"
+	"github.com/spf13/cobra"
 )
 
 const weak_cryptor_folder = "WeakCryptorTest"
@@ -30,7 +30,7 @@ var WeakCryptorCmd = &cobra.Command{
 	Long:  `Uses weak encryption to encrypt_aes data and removes original files`,
 	PreRun: func(cmd *cobra.Command, args []string) {
 		create_folder(weak_cryptor_folder)
-		create_files(weak_cryptor_folder, 500)
+		create_files(weak_cryptor_folder, num_files)
 		weak_cryptor_key = generate_rsa_key()
 	},
 	RunE: func(cmd *cobra.Command, args []string) error {
@@ -49,7 +49,7 @@ var WeakCryptorCmd = &cobra.Command{
 	},
 	PostRun: func(cmd *cobra.Command, args []string) {
 		files := get_files(weak_cryptor_folder)
-		if len(files) == 500 {
+		if len(files) == num_files {
 			fmt.Println("Vulnerable!!!")
 		} else {
 			fmt.Println("Passed :)")

@@ -16,8 +16,8 @@
 package cmd
 
 import (
-	"github.com/spf13/cobra"
 	"fmt"
+	"github.com/spf13/cobra"
 )
 
 const thor_folder = "ThorTest"
@@ -31,7 +31,7 @@ var ThorCmd = &cobra.Command{
 	Long:  `It simulates one of the countless variables of ransomware Thor`,
 	PreRun: func(cmd *cobra.Command, args []string) {
 		create_folder(thor_folder)
-		create_files(thor_folder, 500)
+		create_files(thor_folder, num_files)
 		thor_key = generate_rsa_key()
 	},
 	RunE: func(cmd *cobra.Command, args []string) error {
@@ -42,15 +42,16 @@ var ThorCmd = &cobra.Command{
 			check(err)
 			ciphertext := encrypt_aes(string(text), thor_key)
 			write_to_file(ciphertext, fmt.Sprintf(pwd+"/%s/%s.thor", thor_folder, file.Name()))
+			remove(file_path)
 		}
 		change_wallpaper(url_wallpaper)
 		return nil
 	},
 	PostRun: func(cmd *cobra.Command, args []string) {
 		files := get_files(thor_folder)
-		if len(files) == 500*2{
+		if len(files) == num_files {
 			fmt.Println("Vulnerable!!!")
-		}else{
+		} else {
 			fmt.Println("Passed :)")
 		}
 		remove_all(fmt.Sprintf(pwd+"/%s", thor_folder))

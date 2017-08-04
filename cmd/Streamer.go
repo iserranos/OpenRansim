@@ -16,8 +16,8 @@
 package cmd
 
 import (
-	"github.com/spf13/cobra"
 	"fmt"
+	"github.com/spf13/cobra"
 )
 
 const streamer_folder = "StreamerTest"
@@ -30,7 +30,7 @@ var StreamerCmd = &cobra.Command{
 	Long:  `Encrypts all data and groups it into a single file`,
 	PreRun: func(cmd *cobra.Command, args []string) {
 		create_folder(streamer_folder)
-		create_files(streamer_folder, 500)
+		create_files(streamer_folder, num_files)
 		streamer_key = generate_rsa_key()
 	},
 	RunE: func(cmd *cobra.Command, args []string) error {
@@ -50,7 +50,7 @@ var StreamerCmd = &cobra.Command{
 	},
 	PostRun: func(cmd *cobra.Command, args []string) {
 		files := get_files(streamer_folder)
-		if len(files) == 500+1 {
+		if len(files) == num_files+1 {
 			fmt.Println("Vulnerable!!!")
 		} else {
 			fmt.Println("Passed :)")
