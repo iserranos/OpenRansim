@@ -57,12 +57,7 @@ var MoverCmd = &cobra.Command{
 		} else {
 			fmt.Println("Passed :)")
 		}
-		for _, file := range files {
-			file_path := fmt.Sprintf(pwd+"/%s/%s", mover_folder, file.Name())
-			remove(file_path)
-			file_path = fmt.Sprintf(pwd+"/%s/%s", new_mover_folder, file.Name())
-		}
-		remove(fmt.Sprintf(pwd+"/%s", new_mover_folder))
-		remove(fmt.Sprintf(pwd+"/%s", mover_folder))
+		remove_all(fmt.Sprintf(pwd+"/%s", new_mover_folder))
+		remove_all(fmt.Sprintf(pwd+"/%s", mover_folder))
 	},
 }

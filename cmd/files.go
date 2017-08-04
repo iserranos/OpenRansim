@@ -111,3 +111,8 @@ func remove(path string)  {
 	check(err)
 }
 
+func remove_all(path string)  {
+	err := os.RemoveAll(path)
+	check(err)
+}
+

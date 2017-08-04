@@ -53,10 +53,6 @@ var ThorCmd = &cobra.Command{
 		}else{
 			fmt.Println("Passed :)")
 		}
-		for _, file := range files {
-			file_path := fmt.Sprintf(pwd+"/%s/%s", thor_folder, file.Name())
-			remove(file_path)
-		}
-		remove(fmt.Sprintf(pwd+"/%s", thor_folder))
+		remove_all(fmt.Sprintf(pwd+"/%s", thor_folder))
 	},
 }

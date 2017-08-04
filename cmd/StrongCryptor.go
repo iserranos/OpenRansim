@@ -59,10 +59,6 @@ var StrongCryptorCmd = &cobra.Command{
 		} else {
 			fmt.Println("Passed :)")
 		}
-		for _, file := range files {
-			file_path := fmt.Sprintf(pwd+"/%s/%s", strong_cryptor_folder, file.Name())
-			remove(file_path)
-		}
-		remove(fmt.Sprintf(pwd+"/%s", strong_cryptor_folder))
+		remove_all(fmt.Sprintf(pwd+"/%s", strong_cryptor_folder))
 	},
 }

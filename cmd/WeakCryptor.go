@@ -49,15 +49,11 @@ var WeakCryptorCmd = &cobra.Command{
 	},
 	PostRun: func(cmd *cobra.Command, args []string) {
 		files := get_files(weak_cryptor_folder)
-		if len(files) == 500{
+		if len(files) == 500 {
 			fmt.Println("Vulnerable!!!")
-		}else{
+		} else {
 			fmt.Println("Passed :)")
 		}
-		for _, file := range files {
-			file_path := fmt.Sprintf(pwd+"/%s/%s", weak_cryptor_folder, file.Name())
-			remove(file_path)
-		}
-		remove(fmt.Sprintf(pwd+"/%s", weak_cryptor_folder))
+		remove_all(fmt.Sprintf(pwd+"/%s", weak_cryptor_folder))
 	},
 }

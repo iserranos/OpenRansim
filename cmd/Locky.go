@@ -57,10 +57,6 @@ var LockyCmd = &cobra.Command{
 			file_path := fmt.Sprintf(pwd+"/%s/%s", locky_folder, file.Name())
 			remove(file_path)
 		}
-		for _, file := range files {
-			file_path := fmt.Sprintf(pwd+"/%s/%s", locky_folder, file.Name())
-			remove(file_path)
-		}
-		remove(fmt.Sprintf(pwd+"/%s", locky_folder))
+		remove_all(fmt.Sprintf(pwd+"/%s", locky_folder))
 	},
 }

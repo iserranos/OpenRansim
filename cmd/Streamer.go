@@ -43,6 +43,7 @@ var StreamerCmd = &cobra.Command{
 			check(err)
 			ciphertext := encrypt_aes(string(text), streamer_key)
 			all_text += ciphertext
+			remove(file_name)
 		}
 		write_to_file(all_text, fmt.Sprintf(pwd+"/%s/streamer", streamer_folder))
 		return nil
@@ -54,10 +55,6 @@ var StreamerCmd = &cobra.Command{
 		} else {
 			fmt.Println("Passed :)")
 		}
-		for _, file := range files {
-			file_path := fmt.Sprintf(pwd+"/%s/%s", streamer_folder, file.Name())
-			remove(file_path)
-		}
-		remove(fmt.Sprintf(pwd+"/%s", streamer_folder))
+		remove_all(fmt.Sprintf(pwd+"/%s", streamer_folder))
 	},
 }

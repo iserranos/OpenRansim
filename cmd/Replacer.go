@@ -49,6 +49,6 @@ var ReplacerCmd = &cobra.Command{
 		}else{
 			fmt.Println("Passed :)")
 		}
-		remove(fmt.Sprintf(pwd+"/%s", replacer_folder))
+		remove_all(fmt.Sprintf(pwd+"/%s", replacer_folder))
 	},
 }

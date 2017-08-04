@@ -52,10 +52,6 @@ var InsideCryptoCmd = &cobra.Command{
 		} else {
 			fmt.Println("Passed :)")
 		}
-		for _, file := range files {
-			file_path := fmt.Sprintf(pwd+"/%s/%s", inside_folder, file.Name())
-			remove(file_path)
-		}
-		remove(fmt.Sprintf(pwd+"/%s", inside_folder))
+		remove_all(fmt.Sprintf(pwd+"/%s", inside_folder))
 	},
 }
