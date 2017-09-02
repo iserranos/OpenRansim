@@ -146,28 +146,25 @@ De todas las opciones que existen, los ataques de Ransomware, quizás sean los m
 El primer Ransomware que apareció, fue AIDS Trojan en 1989. Este malware escondía y cifraba los nombres de todos los ficheros que se encontrasen en el disco C. Esto hacia que el ordenador se quedase inservible, teniendo que pagar 189\$ a una oficina de correos en Panamá.\\\\
 En 2011 apareció el primer Trojan, que se aprovechaba de la moda de los pagos anónimos como medio de pago del rescate de los datos. Actualmente, el uso de medios de pago anónimos es algo muy común, aunque no siempre es fácil para el atacante recuperar el dinero.\\\\
 Según las últimas tendencias de Ransomware, el uso de criptografía simétrica es la forma más empleada para hacer que los datos no puedan recuperarse, a menos que se tenga la contraseña. Pero esto no siempre ha sido así, hubo un tiempo en el que la idea principal no era cifrar los datos de un ordenador, sino bloquearlo y hacer que su uso fuera limitado. Estos son los llamados "Lockers", que se valen de exploits y ciertas vulnerabilidades del sistema operativo anulando cualquier interacción con la máquina afectada.\\\\
-Históricamente, este tipo de ataques ha estado siempre dirigido a ordenadores personales, por lo que los ordenadores con un sistema operativo de la familia Microsoft, eran más propensos a este tipo de ataque. Con la llegada de los Smartphone y la capacidad que tienen para ser ordenadores personales portátiles, en 2014 salió un Ransomware centrado en el sistema operativo Android. 
-
+Históricamente, este tipo de ataques ha estado siempre dirigido a ordenadores personales, por lo que los ordenadores con un sistema operativo de la familia Microsoft, eran más propensos a este tipo de ataque. Con la llegada de los Smartphone y la capacidad que tienen para ser ordenadores personales portátiles, en 2014 salió un Ransomware centrado en el sistema operativo Android.\\\\
 El desarrollo del proyecto en cuestión, se centrará en la presentación de una nueva herramienta creada para facilitar la protección de sistemas informáticos frente a ataques de Ransomware. La idea en la que se basará este trabajo, surgió al descubrir algo similar en el mercado. Una aplicación llamada Ransim. Ésta, ejecuta una serie de escenarios, los más comunes, intentando asemejarse a un programa de Ransomware real.\\\\
 El objetivo, es llevar a cabo los procedimientos necesarios para que, dicha herramienta, sea capaz de realizar la misma función que la previamente descubierta, aunque con una diferencia, y es que esta nueva herramienta presentaría un código abierto con posibilidad de ejecutar escenarios ad hoc. Por este motivo, el nombre elegido, ha sido OpenRansim. OpenRansim podrá encontrarse en la siguiente URL: \href{https://github.com/iserranos/OpenRansim}{Github}. 
 Al tratarse de una aplicación de código abierto, cualquier persona con un cierto interés en el tema, podrá colaborar en su desarrollo, lo cual, será clave y podrá favorecer al correcto funcionamiento de la misma.
- 
-
-%\section{Ransomware, historia y motivación del proyecto}
-%\subsection{Introducción}
-
-
-%\subsection{Historia}
-
-
 \subsection{Motivación del proyecto}
 Parece ser, que nos encontramos en un nuevo mundo, el mundo de la digitalización. En este nuevo mundo, uno de los elementos más valiosos, ha pasado a ser la disposición de datos y su control. Por este motivo, el Ransomware, se ha convertido, en la opción con más posibilidades de hacer negocio para los ciberdelincuentes.\\\\
 A comienzos del año 2017, apenas se conocía la existencia de este tipo de ataques, hasta que saltó a la fama WannaCry. En Mayo del mismo año, se lanzó un ataque masivo que afectó a nivel mundial, incluyendo grandes empresas españolas. El 27 de Junio de 2017 salió a la luz otro Ransomware llamado NotPetya. Este último también se propagó a escala mundial afectando a Ucrania, Estados Unidos e Italia, principalmente.\\\\
 Debido al notable aumento de este tipo de ataques, la existencia de una herramienta que pueda medir, de forma fiable, como de protegido se encuentra un ordenador frente a este tipo de amenazas, pasa a convertirse en un recurso vital para compañías de todo el mundo. 
 OpenRansim, ha sido desarrollado, para que cualquier persona, sea capaz de cubrir sus necesidades de protección ante posibles ataques de Ransomware. 
-
 \subsection{Contribuciones}
-
+Como todo proyecto final, es necesario que presente ciertas aportaciones, pudiendo ser mejoras de algo ya existente o totalmente nuevas en el sector. Para este proyecto se ha puesto el foco en presentar nuevas soluciones que ayuden, en la medida de lo posible, a que el mundo Online y de los ordenadores tenga más seguridad. Estas son las nuevas características que presenta OpenRansim: 
+\begin{itemize}
+	\item Simulador de Ransomware - Como aportación principal se encuentra OpenRansim, un simulador de Ransomware que verifica de forma rápida posibles infecciones sin afectar los datos del equipo.
+	\item Modularidad - Este proyecto se ha desarrollado en módulos, haciendo que sea muy fácil de implementar nuevos snippets para los escenarios.
+	\item Código abierto - El desarrollo de OpenRansim se ha hecho bajo la Licencia de código abierto GPL v3.0, permitiendo su uso a cualquier usuario, en cualquier ámbito y de forma gratuita.
+	\item Fácil extensión - Gracias a la modularización de las operaciones más habituales, es muy sencillo reutilizar el código y crear un nuevo escenario sin necesidad de añadir nuevas funcionalidades.
+	\item Optimización - Al estar implementado en Golang, permite un desarrollo muy rápido a la vez que un gran rendimiento, haciendo que se pueda ejecutar cualquier escenario en segundos, empleando los parámetros por defecto.
+\end{itemize}
+En la Sección 2 se introduce OpenRansim, cuales son sus funcionalidades y características. Posteriormente en la Sección 3 se describe cuales son las pruebas que se han realizado y los resultados obtenidos. En la Sección 4 se mencionan proyectos relacionados y las diferencias que tienen con éste. Finalmente, en la Sección 5 se concluye el trabajo y en los apéndices A y B se proporciona una descripción de la planificación y presupuesto del proyecto, respectivamente.
 \section{OpenRansim}
 \subsection{Introducción}
 OpenRansim es una herramienta de línea de comando, desarrollada en Golang bajo la licencia GPL 3.0 de uso libre. La puesta en marcha, se ha llevado a cabo, mediante la utilización de 10 escenarios básicos, aunque su diseño, basado en módulos, permite la creación de escenarios nuevos, haciendo que sea personalizable.
