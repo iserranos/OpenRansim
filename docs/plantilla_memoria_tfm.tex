@@ -135,13 +135,6 @@ Es, por este motivo, que se ha decidido llevar a cabo este Trabajo de Fin de Má
 \newpage
 
 \section{Introducción}
-El desarrollo del proyecto en cuestión, se centrará en la presentación de una nueva herramienta creada para facilitar la protección de sistemas informáticos frente a ataques de Ransomware. La idea en la que se basará este trabajo, surgió al descubrir algo similar en el mercado. Una aplicación llamada Ransim. Ésta, ejecuta una serie de escenarios, los más comunes, intentando asemejarse a un programa de Ransomware real.\\\\
-El objetivo, es llevar a cabo los procedimientos necesarios para que, dicha herramienta, sea capaz de realizar la misma función que la previamente descubierta, aunque con una diferencia, y es que esta nueva herramienta presentaría un código abierto con posibilidad de ejecutar escenarios ad hoc. Por este motivo, el nombre elegido, ha sido OpenRansim. OpenRansim podrá encontrarse en la siguiente URL: \href{https://github.com/iserranos/OpenRansim}{Github}. 
-Al tratarse de una aplicación de código abierto, cualquier persona con un cierto interés en el tema, podrá colaborar en su desarrollo, lo cual, será clave y podrá favorecer al correcto funcionamiento de la misma.
- 
-
-\section{Ransomware, historia y motivación del proyecto}
-\subsection{Introducción}
 Como en muchas facetas de la vida real, la posibilidad de ganar dinero de forma fácil y a costa de los demás, ha llegado ya al mundo Online, como no podía ser de otro modo.\\\\
 Con el paso de los años, han ido apareciendo muchos ciberdelincuentes o, incluso, mafias que están actuando a través de Internet. El secuestro de información, el ciberespionaje, el tráfico de cualquier dato sensible o la venta de piezas de malware, son cada vez más habituales en los tiempos que corren. Debido a esta serie de factores, es de vital importancia que exista, a disposición del usuario una ayuda como la presentada en este ensayo.\\\\
 \begin{figure}[H]
@@ -149,19 +142,31 @@ Con el paso de los años, han ido apareciendo muchos ciberdelincuentes o, inclus
 	\includegraphics[scale=0.7]{imagenes/screenshot.png}
 	\caption[Imagen que aparece en un ordenador infectado]{Imagen que aparece en un ordenador infectado}
 \end{figure}
-De todas las opciones que existen, los ataques de Ransomware, quizás sean los más rentables en términos económicos. Su único objetivo es secuestrar los datos de un ordenador para poder pedir un rescate por ellos. El uso de la criptografía y de las nuevas formas de pago, que garantizan el anonimato, son fundamentales para realizar un buen ataque. 
-
-\subsection{Historia}
+De todas las opciones que existen, los ataques de Ransomware, quizás sean los más rentables en términos económicos. Su único objetivo es secuestrar los datos de un ordenador para poder pedir un rescate por ellos. El uso de la criptografía y de las nuevas formas de pago, que garantizan el anonimato, son fundamentales para realizar un buen ataque.\\\\
 El primer Ransomware que apareció, fue AIDS Trojan en 1989. Este malware escondía y cifraba los nombres de todos los ficheros que se encontrasen en el disco C. Esto hacia que el ordenador se quedase inservible, teniendo que pagar 189\$ a una oficina de correos en Panamá.\\\\
 En 2011 apareció el primer Trojan, que se aprovechaba de la moda de los pagos anónimos como medio de pago del rescate de los datos. Actualmente, el uso de medios de pago anónimos es algo muy común, aunque no siempre es fácil para el atacante recuperar el dinero.\\\\
 Según las últimas tendencias de Ransomware, el uso de criptografía simétrica es la forma más empleada para hacer que los datos no puedan recuperarse, a menos que se tenga la contraseña. Pero esto no siempre ha sido así, hubo un tiempo en el que la idea principal no era cifrar los datos de un ordenador, sino bloquearlo y hacer que su uso fuera limitado. Estos son los llamados "Lockers", que se valen de exploits y ciertas vulnerabilidades del sistema operativo anulando cualquier interacción con la máquina afectada.\\\\
 Históricamente, este tipo de ataques ha estado siempre dirigido a ordenadores personales, por lo que los ordenadores con un sistema operativo de la familia Microsoft, eran más propensos a este tipo de ataque. Con la llegada de los Smartphone y la capacidad que tienen para ser ordenadores personales portátiles, en 2014 salió un Ransomware centrado en el sistema operativo Android. 
+
+El desarrollo del proyecto en cuestión, se centrará en la presentación de una nueva herramienta creada para facilitar la protección de sistemas informáticos frente a ataques de Ransomware. La idea en la que se basará este trabajo, surgió al descubrir algo similar en el mercado. Una aplicación llamada Ransim. Ésta, ejecuta una serie de escenarios, los más comunes, intentando asemejarse a un programa de Ransomware real.\\\\
+El objetivo, es llevar a cabo los procedimientos necesarios para que, dicha herramienta, sea capaz de realizar la misma función que la previamente descubierta, aunque con una diferencia, y es que esta nueva herramienta presentaría un código abierto con posibilidad de ejecutar escenarios ad hoc. Por este motivo, el nombre elegido, ha sido OpenRansim. OpenRansim podrá encontrarse en la siguiente URL: \href{https://github.com/iserranos/OpenRansim}{Github}. 
+Al tratarse de una aplicación de código abierto, cualquier persona con un cierto interés en el tema, podrá colaborar en su desarrollo, lo cual, será clave y podrá favorecer al correcto funcionamiento de la misma.
+ 
+
+%\section{Ransomware, historia y motivación del proyecto}
+%\subsection{Introducción}
+
+
+%\subsection{Historia}
+
 
 \subsection{Motivación del proyecto}
 Parece ser, que nos encontramos en un nuevo mundo, el mundo de la digitalización. En este nuevo mundo, uno de los elementos más valiosos, ha pasado a ser la disposición de datos y su control. Por este motivo, el Ransomware, se ha convertido, en la opción con más posibilidades de hacer negocio para los ciberdelincuentes.\\\\
 A comienzos del año 2017, apenas se conocía la existencia de este tipo de ataques, hasta que saltó a la fama WannaCry. En Mayo del mismo año, se lanzó un ataque masivo que afectó a nivel mundial, incluyendo grandes empresas españolas. El 27 de Junio de 2017 salió a la luz otro Ransomware llamado NotPetya. Este último también se propagó a escala mundial afectando a Ucrania, Estados Unidos e Italia, principalmente.\\\\
 Debido al notable aumento de este tipo de ataques, la existencia de una herramienta que pueda medir, de forma fiable, como de protegido se encuentra un ordenador frente a este tipo de amenazas, pasa a convertirse en un recurso vital para compañías de todo el mundo. 
 OpenRansim, ha sido desarrollado, para que cualquier persona, sea capaz de cubrir sus necesidades de protección ante posibles ataques de Ransomware. 
+
+\subsection{Contribuciones}
 
 \section{OpenRansim}
 \subsection{Introducción}
@@ -185,7 +190,13 @@ Para esta primera versión de OpenRansim se han llevado a cabo una serie de esce
 \end{itemize}
 \subsection{BYOS, Build Your Own Scenario}
 Aquí se habla de como te puedes crear tu propio escenario.
+\subsection{Implementación}
+\section{Validación experimental}
+\section{Trabajos relacionados}
 \section{Conclusión}
 No siempre se devuelven los archivos después de pagar
+\appendix
+\section{Planificación del proyecto}
+\section{Presupuesto}
 
 \end{document}
