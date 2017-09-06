@@ -185,23 +185,107 @@ En la Figura ~\ref{fig:figure2} se muestra un diagrama de como está diseñado O
 Para comprobar que un escenario se ha ejecutado correctamente, y poder así dictaminar si existe una posibilidad de infección o no, se han añadido al desarrollo de la herramienta, las llamadas: pre-task y post-task. Antes de empezar a ejecutar un escenario, la herramienta crea una carpeta especifica donde se van a realizar las pruebas definidas por cada escenario. De esta forma se ejecuta la prueba bajo un entorno controlado sin que afecte a ningún archivo real.\\\\
 Una vez ejecutado un escenario, es necesario comprobar si éste se ha completado correctamente o si, por el contrario, el sistema operativo ha interrumpido la ejecución, detectando y bloqueando, de esta manera, la posible acción maliciosa.  
 \subsection{Escenarios}
-Para esta primera versión de OpenRansim se han llevado a cabo una serie de escenarios, que intentan simular las ejecuciones de varios tipos de Ransomware. Para ello, se han estudiado cuales son las formas de funcionar de las familias de Ransomware más representativas. Estos son los 10 escenarios: 
-\begin{itemize}
+Para esta primera versión de OpenRansim se han llevado a cabo una serie de escenarios, que intentan simular las ejecuciones de varios tipos de Ransomware. Para ello, se han estudiado cuales son las formas de funcionar de las familias de Ransomware más representativas. Estos son los 10 escenarios explicados obviando las fases de pre-task \& post-task: 
+\begin{enumerate}
 \item InsideCryptor – Cifra los datos y sobrescribe los archivos originales.
+\begin{enumerate}
+	\item Se va leyendo archivo por archivo. 
+	\item Sobreescribe el mismo ficheros con los datos cifrados.
+\end{enumerate}
 \item LockyVariant – Simula una de las incontables variables del Ransomware Locky.
+\begin{enumerate}
+	\item Se va leyendo archivo por archivo.
+	\item Crea un nuevo fichero con el mismo nombre y la extensión '.locky'
+	\item Escribe los datos cifrados del ficheros original en el nuevo fichero.
+	\item Elimina el fichero original.
+\end{enumerate}
 \item Mover – Cifra los datos en una carpeta diferente a la original y elimina los ficheros originales.
+\begin{enumerate}
+	\item Se va leyendo archivo por archivo.
+	\item Crea un nuevo fichero con el mismo nombre pero en una carpeta distinta.
+	\item Escribe los datos cifrados del ficheros original en el nuevo fichero.
+	\item Elimina el fichero original.
+	\item Elimina la carpeta original.
+\end{enumerate}
 \item Replacer – Reemplaza el contenido de los archivos.
+\begin{enumerate}
+	\item Escribe cadenas aleatorias en los ficheros. (No realiza ninguna operación criptológica).
+\end{enumerate}
 \item Streamer – Cifra todos los datos y los agrupa en un único fichero.
+\begin{enumerate}
+	\item Se va leyendo archivo por archivo.
+	\item Cifra los datos de los ficheros y guarda el resultado en memoria.
+	\item Cuando ha leido todos los ficheros crea uno en el que vuelca el contenido cifrado de todos los ficheros.
+	\item Elimina todos los ficheros originales.
+\end{enumerate}
 \item StrongCryptor – Cifra los datos y borra los ficheros originales de forma segura.
+\begin{enumerate}
+	\item Se va leyendo archivo por archivo.
+	\item Crea un nuevo fichero con el mismo nombre y la extensión '.copy'
+	\item Escribe los datos cifrados del fichero original en su copia.
+	\item Realiza 30 iteraciones escribiendo información cifrada aleatoria en el archivo original.
+	\item Borra los archivos originales.
+\end{enumerate}
 \item StrongCryptorFast – Cifra los datos y borra los archivos originales.
+\begin{enumerate}
+	\item Se va leyendo archivo por archivo.
+	\item Crea un nuevo fichero con el mismo nombre y la extensión '.copy'
+	\item Escribe los datos cifrados del fichero original en su copia.
+	\item Borra los ficheros originales.
+\end{enumerate}
 \item StrongCrytptorNet – Cifra los datos, borra los ficheros originales y simula una conexión HTTP.
+\begin{enumerate}
+	\item Se va leyendo archivo por archivo.
+	\item Crea un nuevo fichero con el mismo nombre y la extensión '.copy'
+	\item Escribe los datos cifrados del fichero original en su copia.
+	\item Elimina los archivos originales.
+	\item Realiza peticiones HTTP a un servidor mock con parte de la información cifrada.
+\end{enumerate}
 \item ThorVariant – Simula una de las incontables variables del Ransomware Thor.
+\begin{enumerate}
+	\item Se va leyendo archivo por archivo.
+	\item Crea un nuevo fichero con el mismo nombre y la extensión '.thor'
+	\item Escribe los datos cifrados del fichero original en su copia.
+	\item Borra el archivo original.
+	\item Cambia el wallpaper del ordenador.
+\end{enumerate}
 \item WeakCryptor – Utiliza un cifrado débil para cifrar los datos y elimina los archivos originales.
-\end{itemize}
+\begin{enumerate}
+	\item Se va leyendo archivo por archivo.
+	\item Crea un nuevo fichero con el mismo nombre y la extensión '.copy'
+	\item Escribe los datos cifrados del fichero original en su copia.
+	\item Borra los archivos originales.
+\end{enumerate}
+\end{enumerate}
 \subsection{BYOS, Build Your Own Scenario}
 Aquí se habla de como te puedes crear tu propio escenario.
 \subsection{Implementación}
-Para el desarrollo de OpenRansim se ha utilizado el lenguaje Golang. Éste, desarrollado por Google, tiene las ventajas de C en tiempo de ejecución y las de Python, en velocidad de desarrollo. Para poder crear un CLI (Command Line Interface) se ha usado el Framework Cobra. Gracias a Cobra es muy fácil e intuitivo crear CLIs totalmente personalizables con comandos y flags de cualquier tipo. Como se observó en la Figura ~\ref{fig:figure2}
+Para el desarrollo de OpenRansim se ha utilizado el lenguaje Golang. Éste, desarrollado por Google, tiene las ventajas de C en tiempo de ejecución y las de Python, en velocidad de desarrollo. Para poder crear un CLI (Command Line Interface) se ha usado el Framework Cobra. Gracias a Cobra es muy fácil e intuitivo crear CLIs totalmente personalizables con comandos y flags de cualquier tipo. Como se observó en la Figura ~\ref{fig:figure2} la arquitectura de OpenRansim se divide en tres bloques. Los dos más importantes son el paquete cmd y el conjunto de ficheros externos.\\\\
+El bloque cmd contiene todos los comandos que se pueden ejecutar. Estos comandos siguen una forma de implementarse definida por Cobra. Es por eso, que cada comando tiene una fase preliminar y otra posterior a la lógica propia del comando. Estos solo definen una serie de llamadas a funciones con diferentes parámetros de entrada para que se pueda crear un nuevo escenarios. Estas funciones se encuentran implementadas en el grupo de ficheros externos.\\\\
+Estos, que actúan como librerías, contienen funciones muy genéricas y totalmente reutilizables que permiten crear flujos y escenarios muy variados. Dentro de estos ficheros encontramos los siguientes:
+\begin{itemize}
+	\item crypt - Dentro de esta libreria se pueden encontrar un conjunto de operaciones relacionadas con criptografía, es por eso que se usa una librería especial para generar números aleatorios. En este fichero tenemos las siguientes funciones:
+	\begin{itemize}
+		\item Cifrar - Esta función recibe como argumentos un texto en plano, una clave y un algoritmo de cifrado, a día de hoy solo se usan DES y AES. Devuelve un texto cifrado.
+		\item Descifrar - Esta función tiene la misma firma que la anterior pero devolviendo texto en plano.
+		\item Generar clave RSA - Esta función genera un par de claves RSA de las cuales se extrae la clave que se usará en cada escenario, si procede, para cifrar los archivos.
+		\item Generar números aleatorios - Ya el propio nombre de la función explica su lógica. Se puede usar para rellenar ficheros, para poner nombres aleatorios o para la función anterior.
+	\end{itemize}
+	\item files - En esta clase se encuentran todas las funciones relacionadas con el tratamiento de ficheros.
+	\begin{itemize}
+		\item Crear directorio - Crea una carpeta en la ruta que se le pase por argumento.
+		\item Comprobar que existe un directorio - Comprueba la existencia de una carpeta en la ruta que se le pase por argumento.
+		\item Crear ficheros - Crea N ficheros en la carpeta seleccionada siempre y cuando se tengan permisos.
+		\item Crear cadenas aleatorias - Genera N caracteres aleatorios que luego se concatena.
+		\item Obtener información de ficheros - Obtiene toda la información relacionada con los archivos de una carpeta.
+		\item Escribir en fichero - Escribe texto en un fichero.
+		\item Leer de fichero - Devuelve todo el contenido de un fichero o un error.
+		\item Eliminar fichero - Borra de forma permanente un archivo.
+		\item Eliminar directorio - Elimina una carpeta y todos los ficheros que tuviera dicha carpeta.
+	\end{itemize}
+	\item network - Este fichero solo contiene la función de realizar peticiones HTTP. 
+	\item wallpaper - Pasándole como parámetro una URL, cambia el fondo de pantalla por la imagen que se encuentra en esa URL.
+\end{itemize} 
 \section{Validación experimental}
 En esta sección se van a tratar varios puntos relacionados con el tiempo de ejecución y con los resultados de los diferentes escenarios.\\\\
 
