@@ -166,6 +166,7 @@ Como todo proyecto final, es necesario que presente ciertas aportaciones, pudien
 	\item Optimización - Al estar implementado en Golang, permite un desarrollo muy rápido a la vez que un gran rendimiento, haciendo que se pueda ejecutar cualquier escenario en segundos, empleando los parámetros por defecto.
 \end{itemize}
 En la Sección 2 se introduce OpenRansim, cuales son sus funcionalidades y características. Posteriormente en la Sección 3 se describe cuales son las pruebas que se han realizado y los resultados obtenidos. En la Sección 4 se mencionan proyectos relacionados y las diferencias que tienen con éste. Finalmente, en la Sección 5 se concluye el trabajo y en los apéndices A y B se proporciona una descripción de la planificación y presupuesto del proyecto, respectivamente.
+\newpage
 \section{OpenRansim}
 \subsection{Introducción}
 OpenRansim es una herramienta de línea de comando, desarrollada en Golang bajo la licencia GPL 3.0 de uso libre. La puesta en marcha, se ha llevado a cabo, mediante la utilización de 10 escenarios básicos, aunque su diseño, basado en módulos, permite la creación de escenarios nuevos, haciendo que sea personalizable.
@@ -256,9 +257,7 @@ Para esta primera versión de OpenRansim se han llevado a cabo una serie de esce
 	\item Escribe los datos cifrados del fichero original en su copia.
 	\item Borra los archivos originales.
 \end{enumerate}
-\end{enumerate}
-\subsection{BYOS, Build Your Own Scenario}
-Aquí se habla de como te puedes crear tu propio escenario.
+\end{enumerate} 
 \subsection{Implementación}
 Para el desarrollo de OpenRansim se ha utilizado el lenguaje Golang. Éste, desarrollado por Google, tiene las ventajas de C en tiempo de ejecución y las de Python, en velocidad de desarrollo. Para poder crear un CLI (Command Line Interface) se ha usado el Framework Cobra. Gracias a Cobra es muy fácil e intuitivo crear CLIs totalmente personalizables con comandos y flags de cualquier tipo. Como se observó en la Figura ~\ref{fig:figure2} la arquitectura de OpenRansim se divide en tres bloques. Los dos más importantes son el paquete cmd y el conjunto de ficheros externos.\\\\
 El bloque cmd contiene todos los comandos que se pueden ejecutar. Estos comandos siguen una forma de implementarse definida por Cobra. Es por eso, que cada comando tiene una fase preliminar y otra posterior a la lógica propia del comando. Estos solo definen una serie de llamadas a funciones con diferentes parámetros de entrada para que se pueda crear un nuevo escenarios. Estas funciones se encuentran implementadas en el grupo de ficheros externos.\\\\
@@ -286,10 +285,15 @@ Estos, que actúan como librerías, contienen funciones muy genéricas y totalme
 	\item network - Este fichero solo contiene la función de realizar peticiones HTTP. 
 	\item wallpaper - Pasándole como parámetro una URL, cambia el fondo de pantalla por la imagen que se encuentra en esa URL.
 \end{itemize} 
+\subsection{BYOS, Build Your Own Scenario}
+Debido a su gran modularidad, OpenRansim está diseñado para que pueda ser fácilmente extendido y/o mejorado. Cuando se habla de crear un nuevo escenario, es necesario saber un par de características de la herramienta que hacen que sea muy sencillo.\\\\
+Como ya se ha comentado anteriormente, un escenario se basa en ejecutar las funciones que ya existen con los argumentos adecuados. Por lo que para construir un nuevo flujo, es posible que eligiendo las funciones adecuadas y el orden deseado se pueda crear un nuevo test. En caso de que las funciones ya existentes no sean suficientes, es posible crear unas nuevas en los ficheros ya existentes o nuevos ficheros. Gracias al diseño de OpenRansim, cualquier código que se añada a los ficheros externos o librerías van a estar disponibles para ser usadas en cualquier comando, sin necesidad de realizar nuevas importaciones ni precargas.
+\newpage
 \section{Validación experimental}
 En esta sección se van a tratar varios puntos relacionados con el tiempo de ejecución y con los resultados de los diferentes escenarios.\\\\
-
+\newpage
 \section{Trabajos relacionados}
+\newpage
 \section{Conclusión}
 No siempre se devuelven los archivos después de pagar
 \appendix
