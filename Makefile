@@ -36,3 +36,27 @@ clean:
 	@echo "Cleaning build..."
 	@rm -rf OpenRansim
 
+.PHONY: test
+test:
+	@echo "------------------ Test ------------------"
+	@echo "######### Insider #########"
+	time ./OpenRansim inside-crypto
+	@echo "######### Locky #########"
+	time ./OpenRansim locky
+	@echo "######### Mover #########"
+	time ./OpenRansim mover
+	@echo "######### Replacer #########"
+	time ./OpenRansim replacer
+	@echo "######### strong-cryptor #########"
+	time ./OpenRansim strong-cryptor
+	@echo "######### strong-cryptor-fast #########"
+	time ./OpenRansim strong-cryptor-fast
+	@echo "######### strong-cryptor-net #########"
+	time ./OpenRansim strong-cryptor-net
+	@echo "######### thor #########"
+	time ./OpenRansim thor
+	@echo "######### weak-cryptor #########"
+	time ./OpenRansim weak-cryptor
+	@echo "######### streamer #########"
+	time ./OpenRansim streamer
+

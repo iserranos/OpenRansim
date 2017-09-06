@@ -9,6 +9,7 @@
 \usepackage{graphicx}
 \usepackage{fancyhdr}
 \usepackage{hyperref}
+\usepackage{caption}
 \usepackage{float}
 \usepackage{color}
 \definecolor{azulUC3M}{RGB}{0,0,102}
@@ -265,7 +266,7 @@ Estos, que actúan como librerías, contienen funciones muy genéricas y totalme
 \begin{itemize}
 	\item crypt - Dentro de esta libreria se pueden encontrar un conjunto de operaciones relacionadas con criptografía, es por eso que se usa una librería especial para generar números aleatorios. En este fichero tenemos las siguientes funciones:
 	\begin{itemize}
-		\item Cifrar - Esta función recibe como argumentos un texto en plano, una clave y un algoritmo de cifrado, a día de hoy solo se usan DES y AES. Devuelve un texto cifrado.
+		\item Cifrar - Esta función recibe como argumentos un texto en plano, una clave y un algoritmo de cifrado, a día de hoy solo se usan DES y AES con diferentes longitudes de claves. Devuelve un texto cifrado.
 		\item Descifrar - Esta función tiene la misma firma que la anterior pero devolviendo texto en plano.
 		\item Generar clave RSA - Esta función genera un par de claves RSA de las cuales se extrae la clave que se usará en cada escenario, si procede, para cifrar los archivos.
 		\item Generar números aleatorios - Ya el propio nombre de la función explica su lógica. Se puede usar para rellenar ficheros, para poner nombres aleatorios o para la función anterior.
@@ -290,7 +291,35 @@ Debido a su gran modularidad, OpenRansim está diseñado para que pueda ser fác
 Como ya se ha comentado anteriormente, un escenario se basa en ejecutar las funciones que ya existen con los argumentos adecuados. Por lo que para construir un nuevo flujo, es posible que eligiendo las funciones adecuadas y el orden deseado se pueda crear un nuevo test. En caso de que las funciones ya existentes no sean suficientes, es posible crear unas nuevas en los ficheros ya existentes o nuevos ficheros. Gracias al diseño de OpenRansim, cualquier código que se añada a los ficheros externos o librerías van a estar disponibles para ser usadas en cualquier comando, sin necesidad de realizar nuevas importaciones ni precargas.
 \newpage
 \section{Validación experimental}
-En esta sección se van a tratar varios puntos relacionados con el tiempo de ejecución y con los resultados de los diferentes escenarios.\\\\
+En esta sección se van a tratar varios puntos relacionados con el tiempo de ejecución y con los resultados obtenidos de las ejecuciones de los diferentes escenarios.\\\\
+En cuanto a tiempos de ejecución, OpenRansim, al estar desarrollado en Go, es un código muy optimizado y que consume muy poca memoria y CPU comparado con otros lenguajes. Si bien es cierto que obtener un tiempo medio de ejecución de la herramienta aporta mucho valor, la diferencia de escenarios a ejecutar podrían falsear estos tiempos. Es por eso que se ha considerado más oportuno medir los tiempos por cada escenario. Estos son los resultados:
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.45]{imagenes/tiempos.png}
+	\caption[Tiempos de ejecución por escenarios]{Tiempos de ejecución por escenarios}
+	\label{fig:figure3}
+\end{figure}
+Según se muestra en la Figura ~\ref{fig:figure3} los tiempos no superan los 9 segundos y solo un escenario tarda menos de un segundo. Las condiciones, que son comunes para todos los escenarios son las mismas, en este caso es el número de ficheros que maneja cada flujo, 500.\\\\
+Se puede observar como los escenarios que más operaciones criptográficas realizan son los que más tiempo requieren. Aunque cabe destacar, el escenario Streamer, uno de los que más tarda, pues no contiene gran cantidad de instrucciones de cifrado. Debido a que requiere mucha memoria para guardar todos los datos cifrados es el escenario que más memoria consume.\\\\
+Por otro lado, Replacer es el caso que menos tarda. Esto se debe a que no necesita generar ninguna clave ni cifrar la información contenida en los diferentes ficheros.\\\\
+La otra pata de esta sección es la de interpretar los resultados después de lanzar cada uno de los escenarios. Algo muy interesante habría sido ejecutar todos los escenarios en diferentes sistemas operativos y con distintas medidas de protección, pero se ha considerado que ese análisis podría ser otro proyecto de fin de Máster. Es por eso que solo se van a mostrar los resultados obtenidos en un Mac personal sin ningún tipo de protección anti-Ransomware, a excepción de las que vienen por defecto en Mac OS X.\\\\
+\begin{center}
+	\begin{tabular}{ r | c }
+		Insider Crypto & No \\ 
+		Locky  & Si \\ 
+		Mover  & No \\ 
+		Replacer  & No \\ 
+		Streamer  & Si \\ 
+		Strong Cryptor  & Si \\ 
+		Strong Cryptor Fast  & No \\ 
+		Strong Cryptor Net  & No \\ 
+		Thor  & No \\ 
+		Weak Cryptor & No \\
+	\end{tabular}
+	\captionof{table}{Resultados de los escenarios}
+	\label{tab:table1}
+\end{center}
+Según se aprecia en la Tabla ~\ref{tab:table1}, solo tres de los diez flujos son detectados y es el sistema operativo quien corta la ejecución. Comparándolo con la Figura ~\ref{fig:figure3} son estos tres mismos casos los que más tiempo tardan en ejecutarse, más operaciones criptográficas realizan o más memoria consume. Esto indica que Mac OS X es capaz de detectar e interrumpir ciertos procesos que debe de considerar como sospechosos.
 \newpage
 \section{Trabajos relacionados}
 \newpage
