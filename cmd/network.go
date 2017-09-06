@@ -16,7 +16,6 @@
 package cmd
 
 import (
-	"fmt"
 	"github.com/spf13/cobra"
 
 	"net/http"
@@ -48,6 +47,5 @@ func post(url string, data string) {
 	req.Header.Add("accept", "application/json")
 	req.Header.Add("content-type", "text/plain")
 
-	res, _ := http.DefaultClient.Do(req)
-	fmt.Println(res)
+	http.DefaultClient.Do(req)
 }

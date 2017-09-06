@@ -141,6 +141,7 @@ Con el paso de los años, han ido apareciendo muchos ciberdelincuentes o, inclus
 	\centering
 	\includegraphics[scale=0.7]{imagenes/screenshot.png}
 	\caption[Imagen que aparece en un ordenador infectado]{Imagen que aparece en un ordenador infectado}
+	\label{fig:figure1}
 \end{figure}
 De todas las opciones que existen, los ataques de Ransomware, quizás sean los más rentables en términos económicos. Su único objetivo es secuestrar los datos de un ordenador para poder pedir un rescate por ellos. El uso de la criptografía y de las nuevas formas de pago, que garantizan el anonimato, son fundamentales para realizar un buen ataque.\\\\
 El primer Ransomware que apareció, fue AIDS Trojan en 1989. Este malware escondía y cifraba los nombres de todos los ficheros que se encontrasen en el disco C. Esto hacia que el ordenador se quedase inservible, teniendo que pagar 189\$ a una oficina de correos en Panamá.\\\\
@@ -168,6 +169,18 @@ En la Sección 2 se introduce OpenRansim, cuales son sus funcionalidades y carac
 \section{OpenRansim}
 \subsection{Introducción}
 OpenRansim es una herramienta de línea de comando, desarrollada en Golang bajo la licencia GPL 3.0 de uso libre. La puesta en marcha, se ha llevado a cabo, mediante la utilización de 10 escenarios básicos, aunque su diseño, basado en módulos, permite la creación de escenarios nuevos, haciendo que sea personalizable.
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.55]{imagenes/modules.png}
+	\caption[Clases y módulos de OpenRansim]{Clases y módulos de OpenRansim}
+	\label{fig:figure2}
+\end{figure}
+En la Figura ~\ref{fig:figure2} se muestra un diagrama de como está diseñado OpenRansim. En este programa se pueden apreciar tres bloques distintos: Root, Command y los ficheros externos de Golang.
+\begin{itemize}
+	\item Root - Este paquete representa el Framework empleado para crear CLI en Golang. Este es el punto de entrada de la herramienta y quien va a llamar a los diferentes comandos.
+	\item Command - En este conjunto se encuentran los escenarios implementados. Estos, solo contienen el flujo de ejecución, pues la lógica se encuentra en el último grupo de clases. 
+	\item Ficheros externos - Estos archivos ejecutable de Golang son los que contienen los métodos que, por ejemplo, crean directorios, listan ficheros, generan claves o hacen llamadas HTTP. 
+\end{itemize}
 \subsection{Pre task \& Post task}
 Para comprobar que un escenario se ha ejecutado correctamente, y poder así dictaminar si existe una posibilidad de infección o no, se han añadido al desarrollo de la herramienta, las llamadas: pre-task y post-task. Antes de empezar a ejecutar un escenario, la herramienta crea una carpeta especifica donde se van a realizar las pruebas definidas por cada escenario. De esta forma se ejecuta la prueba bajo un entorno controlado sin que afecte a ningún archivo real.\\\\
 Una vez ejecutado un escenario, es necesario comprobar si éste se ha completado correctamente o si, por el contrario, el sistema operativo ha interrumpido la ejecución, detectando y bloqueando, de esta manera, la posible acción maliciosa.  
@@ -188,7 +201,10 @@ Para esta primera versión de OpenRansim se han llevado a cabo una serie de esce
 \subsection{BYOS, Build Your Own Scenario}
 Aquí se habla de como te puedes crear tu propio escenario.
 \subsection{Implementación}
+Para el desarrollo de OpenRansim se ha utilizado el lenguaje Golang. Éste, desarrollado por Google, tiene las ventajas de C en tiempo de ejecución y las de Python, en velocidad de desarrollo. Para poder crear un CLI (Command Line Interface) se ha usado el Framework Cobra. Gracias a Cobra es muy fácil e intuitivo crear CLIs totalmente personalizables con comandos y flags de cualquier tipo. Como se observó en la Figura ~\ref{fig:figure2}
 \section{Validación experimental}
+En esta sección se van a tratar varios puntos relacionados con el tiempo de ejecución y con los resultados de los diferentes escenarios.\\\\
+
 \section{Trabajos relacionados}
 \section{Conclusión}
 No siempre se devuelven los archivos después de pagar
