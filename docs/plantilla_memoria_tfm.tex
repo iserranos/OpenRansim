@@ -16,7 +16,7 @@
 \usepackage[toc,page]{appendix}
 \usepackage{float}
 \usepackage{color}
-\bibliographystyle{abbrv}
+\bibliographystyle{masterthesis}
 \definecolor{azulUC3M}{RGB}{0,0,102}
 \definecolor{gray97}{gray}{.97}
 \definecolor{gray75}{gray}{.75}
@@ -67,7 +67,6 @@
 \begin{sffamily}
 \color{azulUC3M}
 \begin{center}
-%\vspace*{-1cm}
 \begin{figure}[htb]
 \begin{center}
 \vspace*{0.6cm}
@@ -76,65 +75,50 @@
 \end{center}
 \end{figure}
 \begin{LARGE}
-Máster Universitario en Ciberseguridad \\%completar el nombre del grado
-2017/2018 \\%indicar el curso académico
+Máster Universitario en Ciberseguridad \\
+2017/2018 \\
 \vspace*{1cm}
 \textsl{Trabajo Fin de Máster}\\
 \end{LARGE}
-\Huge{\textbf{OpenRansim}}\\ %Más significativo que el anterior
+\Huge{\textbf{OpenRansim}}\\
 \vspace*{1cm}
 \rule{80mm}{0.1mm}\\
-\huge{Íñigo Serrano Salgado}\\ %Separar cada autor con \\ 
+\huge{Íñigo Serrano Salgado}\\ 
 \vspace*{0.5cm}
 \begin{Large}
 Tutor\\
 Juan Tapiador\\
-Lugar y fecha de presentación prevista\\
+08-09-2017\\
 \end{Large}
 \end{center}
 \vspace*{2cm}
 \color{black}
 \emph{Palabras clave:} Ransomware, simulation, security, malware, encryption. \\
 \emph{Resumen:} En este documento, se va a presentar una herramienta de código abierto que sirve para comprobar la protección de un sistema informático frente a ataques de Ransomware.\\
-%\includegraphics{imagenes/creativecommons.png}\\
-%\emph{[Incluir en el caso de interés en su publicación en el archivo abierto]}\\
-%Esta obra se encuentra sujeta a la licencia Creative Commons \textbf{Reconocimiento - No Comercial - Sin Obra Derivada}
 
 \end{sffamily}
 \end{titlepage}
 
 \pagestyle{fancy}
-\fancyhead{} % Clear all header fields
+\fancyhead{} 
 \setlength\headheight{21.2pt}
 \lhead{\hspace*{-0.3cm}\raisebox{-0.3\height}{\includegraphics[scale=1]{imagenes/Interior_Logo.png}}}
-\rhead{\color{azulUC3M} OpenRansim} %Poner encabezado
+\rhead{\color{azulUC3M} OpenRansim}
 
-\renewcommand{\tablename}{\textbf{Tabla}} %para poner la palabra en mayusucula
-\renewcommand{\figurename}{\textbf{Figura}} % para poner la palabra en mayuscula
+\renewcommand{\tablename}{\textbf{Tabla}} 
+\renewcommand{\figurename}{\textbf{Figura}}
 \renewcommand{\listtablename}{Índice de tablas}
 
 \newpage
-
 \tableofcontents
-
 \newpage
-
 \listoffigures
-
-%Para imagenes
-%\begin{figure}[H]
-%\centering
-%\includegraphics[scale=0.8]{imagenes/*.png}
-%\caption{}
-%\end{figure}
-
+\listoftables
 \newpage
-
-
 
 %Comenzar el trabajo
 \begin{abstract}
-Hoy en día, uno de los ataques más comunes y eficaces que existen en el mundo de Internet, es el llamado Ransomware. Este tipo de ataques empezó a surgir en 1989 con AIDS Trojan. El Ransomware, se basa en secuestrar los datos de un sistema informático y pedir un rescate por estos. Técnicamente no requiere grandes conocimientos de seguridad para desarrollar un ejecutable, aunque, es cierto, que muchos emplean exploits para la fase de propagación. Lo cual lo convierte en uno de los ataques más efectivos y que suele obtener sus objetivos.\\\\
+Hoy en día, uno de los ataques más comunes y eficaces que existen en el mundo de Internet, es el llamado Ransomware\cite{ransomware}. Este tipo de ataques empezó a surgir en 1989 con AIDS Trojan. El Ransomware, se basa en secuestrar los datos de un sistema informático y pedir un rescate por estos. Técnicamente no requiere grandes conocimientos de seguridad para desarrollar un ejecutable, aunque, es cierto, que muchos emplean exploits para la fase de propagación. Lo cual lo convierte en uno de los ataques más efectivos y que suele obtener sus objetivos.\\\\
 Es, por este motivo, que se ha decidido llevar a cabo este Trabajo de Fin de Máster, con el objetivo de aportar facilidades, para poder así evitar una infección en nuestros equipos y la consecuente remuneración para poder acceder de nuevo a nuestros archivos.
 \end{abstract}
 
@@ -150,26 +134,26 @@ Con el paso de los años, han ido apareciendo muchos ciberdelincuentes o, inclus
 	\label{fig:figure1}
 \end{figure}
 De todas las opciones que existen, los ataques de Ransomware, quizás sean los más rentables en términos económicos. Su único objetivo es secuestrar los datos de un ordenador para poder pedir un rescate por ellos. El uso de la criptografía y de las nuevas formas de pago, que garantizan el anonimato, son fundamentales para realizar un buen ataque.\\\\
-El primer Ransomware que apareció, fue AIDS Trojan en 1989. Este malware escondía y cifraba los nombres de todos los ficheros que se encontrasen en el disco C. Esto hacia que el ordenador se quedase inservible, teniendo que pagar 189\$ a una oficina de correos en Panamá.\\\\
+El primer Ransomware que apareció, fue AIDS Trojan en el año 1989. Este malware escondía y cifraba los nombres de todos los ficheros que se encontrasen en el disco C. Esto hacia que el ordenador se quedase inservible, teniendo que pagar 189\$ a una oficina de correos en Panamá.\\\\
 En 2011 apareció el primer Trojan, que se aprovechaba de la moda de los pagos anónimos como medio de pago del rescate de los datos. Actualmente, el uso de medios de pago anónimos es algo muy común, aunque no siempre es fácil para el atacante recuperar el dinero.\\\\
 Según las últimas tendencias de Ransomware, el uso de criptografía simétrica es la forma más empleada para hacer que los datos no puedan recuperarse, a menos que se tenga la contraseña. Pero esto no siempre ha sido así, hubo un tiempo en el que la idea principal no era cifrar los datos de un ordenador, sino bloquearlo y hacer que su uso fuera limitado. Estos son los llamados "Lockers", que se valen de exploits y ciertas vulnerabilidades del sistema operativo anulando cualquier interacción con la máquina afectada.\\\\
-Históricamente, este tipo de ataques ha estado siempre dirigido a ordenadores personales, por lo que los ordenadores con un sistema operativo de la familia Microsoft, eran más propensos a este tipo de ataque. Con la llegada de los Smartphone y la capacidad que tienen para ser ordenadores personales portátiles, en 2014 salió un Ransomware centrado en el sistema operativo Android.\\\\
+Históricamente, este tipo de ataques ha estado siempre dirigido a ordenadores personales, por lo que los ordenadores con un sistema operativo de la familia Microsoft\cite{microsoft}, eran más propensos a este tipo de ataque. Con la llegada de los Smartphone y la capacidad que tienen para ser ordenadores personales portátiles, en 2014 salió un Ransomware centrado en el sistema operativo Android\cite{android}.\\\\
 El desarrollo del proyecto en cuestión, se centrará en la presentación de una nueva herramienta creada para facilitar la protección de sistemas informáticos frente a ataques de Ransomware. La idea en la que se basará este trabajo, surgió al descubrir algo similar en el mercado. Una aplicación llamada Ransim. Ésta, ejecuta una serie de escenarios, los más comunes, intentando asemejarse a un programa de Ransomware real.\\\\
 El objetivo, es llevar a cabo los procedimientos necesarios para que, dicha herramienta, sea capaz de realizar la misma función que la previamente descubierta, aunque con una diferencia, y es que esta nueva herramienta presentaría un código abierto con posibilidad de ejecutar escenarios ad hoc. Por este motivo, el nombre elegido, ha sido OpenRansim. OpenRansim podrá encontrarse en la siguiente URL: \href{https://github.com/iserranos/OpenRansim}{Github}. 
 Al tratarse de una aplicación de código abierto, cualquier persona con un cierto interés en el tema, podrá colaborar en su desarrollo, lo cual, será clave y podrá favorecer al correcto funcionamiento de la misma.
 \subsection{Motivación del proyecto}
 Parece ser, que nos encontramos en un nuevo mundo, el mundo de la digitalización. En este nuevo mundo, uno de los elementos más valiosos, ha pasado a ser la disposición de datos y su control. Por este motivo, el Ransomware, se ha convertido, en la opción con más posibilidades de hacer negocio para los ciberdelincuentes.\\\\
-A comienzos del año 2017, apenas se conocía la existencia de este tipo de ataques, hasta que saltó a la fama WannaCry. En Mayo del mismo año, se lanzó un ataque masivo que afectó a nivel mundial, incluyendo grandes empresas españolas. El 27 de Junio de 2017 salió a la luz otro Ransomware llamado NotPetya. Este último también se propagó a escala mundial afectando a Ucrania, Estados Unidos e Italia, principalmente.\\\\
+A comienzos del año 2017, apenas se conocía la existencia de este tipo de ataques, hasta que saltó a la fama WannaCry\cite{wannacry}. En Mayo del mismo año, se lanzó un ataque masivo que afectó a nivel mundial, incluyendo grandes empresas españolas. El 27 de Junio de 2017 salió a la luz otro Ransomware llamado NotPetya. Este último también se propagó a escala mundial afectando a Ucrania, Estados Unidos e Italia, principalmente.\\\\
 Debido al notable aumento de este tipo de ataques, la existencia de una herramienta que pueda medir, de forma fiable, como de protegido se encuentra un ordenador frente a este tipo de amenazas, pasa a convertirse en un recurso vital para compañías de todo el mundo. 
 OpenRansim, ha sido desarrollado, para que cualquier persona, sea capaz de cubrir sus necesidades de protección ante posibles ataques de Ransomware. 
 \subsection{Contribuciones}
 Como todo proyecto final, es necesario que presente ciertas aportaciones, pudiendo ser mejoras de algo ya existente o totalmente nuevas en el sector. Para este proyecto se ha puesto el foco en presentar nuevas soluciones que ayuden, en la medida de lo posible, a que el mundo Online y de los ordenadores tenga más seguridad. Estas son las nuevas características que presenta OpenRansim: 
 \begin{itemize}
 	\item Simulador de Ransomware - Como aportación principal se encuentra OpenRansim, un simulador de Ransomware que verifica de forma rápida posibles infecciones sin afectar los datos del equipo.
-	\item Modularidad - Este proyecto se ha desarrollado en módulos, haciendo que sea muy fácil de implementar nuevos snippets para los escenarios.
+	\item Modularidad - Este proyecto se ha desarrollado en módulos, haciendo que sea muy fácil de implementar nuevos snippets para los casos.
 	\item Código abierto - El desarrollo de OpenRansim se ha hecho bajo la Licencia de código abierto GPL v3.0, permitiendo su uso a cualquier usuario, en cualquier ámbito y de forma gratuita.
 	\item Fácil extensión - Gracias a la modularización de las operaciones más habituales, es muy sencillo reutilizar el código y crear un nuevo escenario sin necesidad de añadir nuevas funcionalidades.
-	\item Optimización - Al estar implementado en Golang, permite un desarrollo muy rápido a la vez que un gran rendimiento, haciendo que se pueda ejecutar cualquier escenario en segundos, empleando los parámetros por defecto.
+	\item Optimización - Al estar implementado en Golang\cite{golang}, permite un desarrollo muy rápido a la vez que un gran rendimiento, haciendo que se pueda ejecutar cualquier escenario en segundos, empleando los parámetros por defecto.
 \end{itemize}
 En la Sección 2 se introduce OpenRansim, cuales son sus funcionalidades y características. Posteriormente en la Sección 3 se describe cuales son las pruebas que se han realizado y los resultados obtenidos. En la Sección 4 se mencionan proyectos relacionados y las diferencias que tienen con éste. Finalmente, en la Sección 5 se concluye el trabajo y en los apéndices A y B se proporciona una descripción de la planificación y presupuesto del proyecto, respectivamente.
 \newpage
@@ -265,7 +249,7 @@ Para esta primera versión de OpenRansim se han llevado a cabo una serie de esce
 \end{enumerate}
 \end{enumerate} 
 \subsection{Implementación}
-Para el desarrollo de OpenRansim se ha utilizado el lenguaje Golang. Éste, desarrollado por Google, tiene las ventajas de C en tiempo de ejecución y las de Python, en velocidad de desarrollo. Para poder crear un CLI (Command Line Interface) se ha usado el Framework Cobra. Gracias a Cobra es muy fácil e intuitivo crear CLIs totalmente personalizables con comandos y flags de cualquier tipo. Como se observó en la Figura ~\ref{fig:figure2} la arquitectura de OpenRansim se divide en tres bloques. Los dos más importantes son el paquete cmd y el conjunto de ficheros externos.\\\\
+Para el desarrollo de OpenRansim se ha utilizado el lenguaje Golang. Éste, desarrollado por Google, tiene las ventajas de C en tiempo de ejecución y las de Python\cite{python}, en velocidad de desarrollo. Para poder crear un CLI (Command Line Interface) se ha usado el Framework Cobra\cite{cobra}. Gracias a Cobra es muy fácil e intuitivo crear CLIs totalmente personalizables con comandos y flags de cualquier tipo. Como se observó en la Figura ~\ref{fig:figure2} la arquitectura de OpenRansim se divide en tres bloques. Los dos más importantes son el paquete cmd y el conjunto de ficheros externos.\\\\
 El bloque cmd contiene todos los comandos que se pueden ejecutar. Estos comandos siguen una forma de implementarse definida por Cobra. Es por eso, que cada comando tiene una fase preliminar y otra posterior a la lógica propia del comando. Estos solo definen una serie de llamadas a funciones con diferentes parámetros de entrada para que se pueda crear un nuevo escenarios. Estas funciones se encuentran implementadas en el grupo de ficheros externos.\\\\
 Estos, que actúan como librerías, contienen funciones muy genéricas y totalmente reutilizables que permiten crear flujos y escenarios muy variados. Dentro de estos ficheros encontramos los siguientes:
 \begin{itemize}
@@ -273,7 +257,7 @@ Estos, que actúan como librerías, contienen funciones muy genéricas y totalme
 	\begin{itemize}
 		\item Cifrar - Esta función recibe como argumentos un texto en plano, una clave y un algoritmo de cifrado, a día de hoy solo se usan DES y AES con diferentes longitudes de claves. Devuelve un texto cifrado.
 		\item Descifrar - Esta función tiene la misma firma que la anterior pero devolviendo texto en plano.
-		\item Generar clave RSA - Esta función genera un par de claves RSA de las cuales se extrae la clave que se usará en cada escenario, si procede, para cifrar los archivos.
+		\item Generar clave RSA - Esta función genera un par de claves RSA\cite{rsa} de las cuales se extrae la clave que se usará en cada escenario, si procede, para cifrar los archivos.
 		\item Generar números aleatorios - Ya el propio nombre de la función explica su lógica. Se puede usar para rellenar ficheros, para poner nombres aleatorios o para la función anterior.
 	\end{itemize}
 	\item files - En esta clase se encuentran todas las funciones relacionadas con el tratamiento de ficheros.
@@ -389,5 +373,30 @@ El coste total del proyecto es de 14.011\euro.
 	\caption{Coste estimado del proyecto}
 	\label{tab:table2}
 \end{table}
-\bibliography{bibfile}
+\begin{thebibliography}{9}
+\bibitem{ransomware} 
+Ransomware
+\\\texttt{https://www.trendmicro.com/vinfo/us/security/definition/ransomware}
+\bibitem{microsoft} 
+Microsoft
+\\\texttt{https://www.microsoft.com/}
+\bibitem{android} 
+Android
+\\\texttt{https://www.android.com/}
+\bibitem{wannacry} 
+Ataque del Ransomware Wannacry ,
+\\\texttt{https://en.wikipedia.org/wiki/WannaCry\_ransomware\_attack}
+\bibitem{golang} 
+Lenguaje Go
+\\\texttt{https://golang.org/}
+\bibitem{python} 
+Python
+\\\texttt{https://www.python.org/}
+\bibitem{cobra} 
+Cobra
+\\\texttt{https://github.com/spf13/cobra}
+\bibitem{rsa} 
+RSA
+\\\texttt{https://en.wikipedia.org/wiki/RSA\_(cryptosystem)}
+\end{thebibliography}
 \end{document}
