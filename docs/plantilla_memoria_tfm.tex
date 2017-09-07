@@ -7,11 +7,16 @@
 \usepackage{multirow}
 %\usepackage{makeidx}
 \usepackage{graphicx}
+\usepackage{pgfgantt}
 \usepackage{fancyhdr}
+\usepackage{booktabs}
+\usepackage{eurosym}
 \usepackage{hyperref}
 \usepackage{caption}
+\usepackage[toc,page]{appendix}
 \usepackage{float}
 \usepackage{color}
+\bibliographystyle{abbrv}
 \definecolor{azulUC3M}{RGB}{0,0,102}
 \definecolor{gray97}{gray}{.97}
 \definecolor{gray75}{gray}{.75}
@@ -324,9 +329,65 @@ Según se aprecia en la Tabla ~\ref{tab:table1}, solo tres de los diez flujos so
 \section{Trabajos relacionados}
 \newpage
 \section{Conclusión}
-No siempre se devuelven los archivos después de pagar
+Para cerrar este documento se van a exponer cuales han sido las conclusiones obtenidas y que puntos de mejora se han extraído al finalizar este proyecto.\\\\
+El Ramsonware es una de las amenazas más reales y cercanas que tienen los usuarios de Internet. Y como ya se ha comentado, el dinero es el principal incentivo que motiva a los creadores de este tipo de malware. Es un gran problema verse infectado por un Ransomware, pues la perdida de todos los datos personales y la incertidumbre de no saber si se pueden recuperar hace que mucha gente elija pagar un rescate para poder recuperarlos. Aunque no siempre es así, pagar el rescate por los datos no garantiza que los datos vuelvan a estar igual que antes de la infección. \\\\
+Es por eso que la existencia de una nueva herramienta que permita medir el grado de protección frente a estos ataques es realmente necesario. Además, OpenRansim presenta un diseño orientado a su fácil extensión y a la seguridad del propio ordenador en el que se va a ejecutar. Gracias a esto, OpenRansim se puede convertir en un framework de simulación de escenarios de Ransomware desarrollado y mejorado por la comunidad.
+\subsection{Trabajos futuros}
+Se han identificado una serie de posibles mejoras para OpenRansim:
+\begin{enumerate}
+	\item Nuevos escenarios.
+	\item Nuevas funciones que den soporte a los escenarios.
+	\item Mejora en la detección de si un caso es presenta una posible brecha.
+\end{enumerate}
+\newpage
 \appendix
+Para cumplir con las reglas de evaluación del Trabajo de Fin de Máster, a continuación se presenta la planificación y el presupuesto del proyecto.
 \section{Planificación del proyecto}
+Esta sección incluye la Figura ~\ref*{fig:figure4} en la que muestra un diagrama de Gantt que representa como se ha planificado el proyecto. Se han establecido 4 fases:
+\begin{enumerate}
+	\item Análisis - En esta fase se llevo a cabo la definición de objetivos y el estado del arte del proyecto.
+	\item Desarrollo - En este punto se unen el diseño e implementación de la herramienta.
+	\item Test - Pruebas unitarias, pruebas de rendimiento y mejoras del código.
+	\item Memoria - Incluye este documento y la presentación para la defensa.
+\end{enumerate}
+\begin{figure}[H]
+	\centering
+	\begin{center}
+		\begin{ganttchart}[
+			hgrid,x unit=0.69mm,
+			hgrid style/.style={draw=black!5, line width=.75pt},
+			vgrid={*{6}{draw=none}},
+			time slot format=little-endian]{06-03-2017}{30-08-2017}
+			\gantttitlecalendar{month=shortname} \\
+			\ganttbar{Análisis}{06-03-2017}{21-04-2017} \\
+			\ganttbar{Desarrollo}{30-04-2017}{12-07-2017} \\
+			\ganttbar{Test}{28-05-2017}{16-07-2017} \\
+			\ganttbar{Memoria}{06-08-2017}{29-08-2017} \\
+			\ganttlink{elem0}{elem1}
+			\ganttlink{elem1}{elem3}
+			\ganttlink{elem2}{elem3}
+		\end{ganttchart}
+	\end{center}
+	\caption{Gantt}
+	\label{fig:figure4}
+\end{figure}
 \section{Presupuesto}
-
+El coste total del proyecto es de 14.011\euro.
+\begin{table}[H]
+	\centering
+	\begin{tabular}{@{}lrrr@{}}
+		\toprule
+		\multicolumn{4}{c}{{Coste estimado del proyecto}} \\ \midrule
+		\multicolumn{1}{c}{\textbf{Componente}} & \multicolumn{1}{c}{\textbf{Coste}} & \multicolumn{1}{c}{\textbf{Porcentaje}} & \multicolumn{1}{c}{\textbf{Total}} \\
+		MacBook Pro & 2.500 \euro & 10\% & 250 \euro \\
+		Internet & 390 \euro & 20\% & 78 \euro \\
+		Electricidad & 891 \euro & 20\% & 178 \euro \\
+		Analista de Seguridad/Hora & 65 \euro & 183 & 11.895 \euro \\
+		Supervisor/Hora & 70 \euro & 23 & 1.610 \euro \\
+		\multicolumn{3}{l}{\textbf{Total}} & \textbf{14.011 \euro} \\ \bottomrule
+	\end{tabular}
+	\caption{Coste estimado del proyecto}
+	\label{tab:table2}
+\end{table}
+\bibliography{bibfile}
 \end{document}
